@@ -28,7 +28,6 @@ def quzi3():
     
     except Exception as e:
         print(f'err : {e}')
-        conn.rollback() # select 에는 필요 X
     
     finally: 
         cursor.close()

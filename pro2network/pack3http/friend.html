@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>friend</title>
+</head>
+<body>
+    **친구 정보**<br/>
+    <!-- 
+    post 방식 : http://127.0.0.1:8888/cgi-bin/friend.py 으로 받음
+    요청방식 : 무조건 form태그 안에 method에 적어줘야함.
+    그냥 요청하는건 전부 get방식    
+    -->
+
+    <form action="cgi-bin/friend.py" method="post">
+    이름 : <input type="text" name="name"><br/>
+    전화 : <input type="text" name="phone"><br/>
+    성별 : <!-- 정해진건 입력하지 않는게 좋다-->
+        <input type="radio" name="gen" value="남" checked>남자
+        <input type="radio" name="gen" value="여">여자
+    <br/> <!-- cgi-bin/friend.py 로 전송-->
+        <input type="submit" value="서버로 자료 전송">
+</body>
+</html>
