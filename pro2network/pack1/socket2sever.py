@@ -1,4 +1,6 @@
-# 무한루프
+'''
+socket server2 - 무한루프
+'''
 import socket
 import sys
 

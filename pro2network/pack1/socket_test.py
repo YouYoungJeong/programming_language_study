@@ -9,6 +9,7 @@ socket이란 TCP/IP의 프로그래머 인터페이스이다.
 연결지향 : TCP/IP
 비연결지향 : 
 """
+# socket test
 import socket
 # 기본적으로 tcp를 사용하고 용도가 다른 프로토콜 
 # 0 ~ 1024번까지 마음대로 쓰지 X :이미 누군가가 점유하고 있는 port넘버

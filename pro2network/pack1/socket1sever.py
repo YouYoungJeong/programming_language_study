@@ -1,5 +1,5 @@
 '''
-일회용 서버(소켓이용)
+socket server1 - 일회용 서버
 '''
 from socket import *
 

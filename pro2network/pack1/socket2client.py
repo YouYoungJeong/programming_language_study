@@ -1,4 +1,6 @@
-# clientp
+'''
+socket client2 - 무한 루프
+'''
 from socket import *
 
 clientsock=socket(AF_INET, SOCK_STREAM)
