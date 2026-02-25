@@ -19,13 +19,13 @@ def quzi4():
             from gogek left outer join jikwon on gogekdamsano=jikwonno
             group by jikwonno
             """
+        # == jikwon inner join gogek 
         cursor.execute(sql)
         selectsql = cursor.fetchall()
         print('직원번호 직원명\t관리고객수')
         for (jikwonno,jikwonname,count) in selectsql:            
             print("{}\t{}\t{}".format(jikwonno,jikwonname,count))
         
-    
     except Exception as e:
         print(f'err : {e}')
         conn.rollback() # select 에는 필요 X
