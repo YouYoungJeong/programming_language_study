@@ -1,4 +1,6 @@
-# client
+'''
+socket client1 - 일회용 서버
+'''
 from socket import *
 
 clientsock=socket(AF_INET, SOCK_STREAM)
