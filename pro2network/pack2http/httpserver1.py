@@ -2,6 +2,7 @@
 # https://cafe.daum.net/flowlife/RUrO/144
 # Flask가기전에 직접 단순한 HTTPServer 구축 - 기본적인 socket연결 관리
 # SimpleHTTPRequestHandler 는 python은 해석을 못함.
+# tcpip를 class로 만든게 소켓
 
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 

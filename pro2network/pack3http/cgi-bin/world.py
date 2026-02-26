@@ -23,6 +23,6 @@ print("""
         <a href="../index.html">메인으로</a>
     </body>
     </html>
-        """.format(s1, s2)) # 템플레이트.
+        """.format(s1, s2)) # 템플레이트기호와  1:1 매핑.
 
 # 경로 변경: ../images/dog.jpeg => 상위폴더로 올라가서/images/dog.jpeg
