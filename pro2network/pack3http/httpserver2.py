@@ -12,12 +12,15 @@ from http.server import HTTPServer, CGIHTTPRequestHandler
 
 PORT = 8888
 
+"""
+HTTPServer는 CGIHTTPRequestHandler를 받아야함. 상속
+받으면서 '/cgi-bin'를 같이 보냄.
+"""
 class Handler(CGIHTTPRequestHandler):
-    # 받을 파일이 여러개면 이런식으로 list로 받았다.
+    # 받을 파일이 여러개면 이런식으로 디렉토리를 <- list로 받았다.
     cgi_directories=['/cgi-bin']
 
-# HTTPServer는 CGIHTTPRequestHandler를 받아야함. 상속
-# 받으면서 '/cgi-bin'를 같이 보냄.
+
 def run():
     serv = HTTPServer(('127.0.0.1', PORT), Handler)
     

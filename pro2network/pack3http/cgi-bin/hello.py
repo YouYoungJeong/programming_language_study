@@ -5,7 +5,7 @@ ss2 = 123 + 5
 # print : 개발자가 자신의 컴 표준출력장치로 값 확인
 print(ss)
 
-# 클라이언트 브라우저로 출력(첫글자 대문자)
+# 클라이언트 브라우저로 출력(Content-Type : 첫글자 대문자)
 print("Content-Type:text/html;charset:utf-8\n")
 # html
 print("<html>")
