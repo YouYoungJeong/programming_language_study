@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블</title>
+</head>
+<body>
+    <h4>---- table(표) tag ----</h4>
+            <!--border같은 디자인들은 styel로 주는게 좋다. 
+                HTML5부터는 디자인은 CSS를 사용는걸 권장함.
+                W3C(World Wide Web Consortium)
+                    웹의 장기적인 성장과 웹 접근성, 보안, 개인정보 보호를 위한 표준을 제정
+                    웹 표준 제정: HTML, CSS, XML, DOM, SVG, WCAG 등 
+                    웹 기술의 사양서(Specification)를 작성하여 웹 브라우저와 기기 간의 호환성을 보장.
+                웹 표준 (Web Standards) : 정리! 
+                    시큐어코드 같이. 정해놓은게 있음.
+                -->
+    <table border="1">
+        <tr><!--행-->
+            <!--표제 알아서 bold, 가운데정렬-->
+            <th>번호</th><th>이름</th><th>주소</th>
+        </tr>
+        <tr>
+            <td width="50">1</td><td>가나디</td><td>강남구 역삼동</td>
+        </tr>
+        <tr>
+            <td>2</td><td>망곰</td><td>서초구 서초동</td>
+        </tr>
+    </table>
+    <br/>
+    열병합(colspan), 행병합(rowspan), 테이블안에 테이블<br>
+    <table border="1" width="200">
+        <tr>
+            <td colspan="2">a</td>
+            <td>b</td>
+            <td rowspan="2">cell(셀)</td>
+        </tr>
+        <tr>
+            <td>cell(셀)</td>
+            <td>cell(셀)</td>
+            <td><!-- table 태그 안에서만 사용가능 : tr, td -->
+                <table border="2">
+                    <tr>
+                        <td>kor</td>
+                        <td>eng</td>
+                    </tr>
+                </table>
+            </td>
+        </tr >
+    </table>
+
+    <br/><br/><hr>
+    <h4>form 태그(자료 입력용 태그)</h4>
+    <form method="get"><!-- 갈데 없어서 action안씀-->
+        <!--
+            input text : Single line editer
+            name: 은 변수명, 그룹을 결정함
+            id : java, 이런데에서 중복 허용 하지 않을때?
+            value : 초기치
+            readonly : 읽기전용(입력불가)
+        -->
+        1. 이름 : <input type="text" name="name" id="irum" value="이기자" size="30" readonly/><br>
+        2. 비밀번호 :<input type="password" name="pwd"><br>
+        3. 메세지 : <textarea name="msg" cols="50" rows="5">Mult line Text Box</textarea><br>
+        <!--radio 무조건 하나의 값을 받아야함-->
+        4. 학년 : <input type="radio" name="hak" value="1" checked>1학년
+                <input type="radio" name="hak" value="2" >2학년
+                <input type="radio" name="hak2" value="3" >3학년 <!-- name으로 그룹을 결정함-->
+                <input type="radio" name="hak2" value="4" >4학년<br>
+        <!--checkbox : 선택 할수도 있고 여러개 선택할 수도 있다.-->
+        5. 과목 : <input type="checkbox" name="gwa" value="python"> 파이썬&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="gwa" value="c"> c언어&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="gwa" value="java"> 자바&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="gwa" value="SQL"> SQL&nbsp;&nbsp;&nbsp;
+        <!-- select버튼 radio버튼과 같은결 선택은 개발자 마음
+        <select name="addr" multiple> 펴져있는 상태 요즘은 잘 안씀
+        -->
+        6. 지역 : <select name="addr" >
+                    <option value="c" selected>시청</option>
+                    <option value="j" >종로</option>
+                    <option value="k" selected>강남</option>
+                </select><br>
+        <!-- 파일 선택 창 서버로(python)보낼때 파일을 보낼 수 있다.-->
+        7. <input type="file" name="fname"><br>
+        <!--
+            숨김(hidden)-자주 사용!
+                넘기기는 넘기고 싶은데 화면상에 보여주고 싶지 않을때 사용
+                상품의 가격을 보내긴 보낼건데 입력하고 싶지 않을땐 히든 사용 
+        -->
+        8.숨김(hidden) : <input type="hidden" name="ji" value="대한민국"><br><br>
+        <!--JS명령이 자동으로 입력되어있는 명령어 : 메이커측에서 만듦. -->
+        <input type="submit" value="전송 확인">
+        <input type="reset" value="입력 취소">
+    </form>
+</body>
+</html>

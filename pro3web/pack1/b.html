@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지와 링크</title>
+</head> 
+<body><!-- body영역에 있는게 하나의 frame-->
+    이미지 삽입<!--alt : 이미지 없을때 대신 나오는것-->
+    <img src="images/cat.jpeg" width="100" title="고양이" alt="난 고양이야"/>
+    <br> 이미지 주소 복사
+    <img src="https://t1.daumcdn.net/gamepub/top/2018/code/game_w_eversoul.jpg" width="100">
+    <br><br><hr>    
+    
+    <h4>** a tag 연습 **</h4>
+    html에서 가장 중요한 태그! <br>
+    <!-- 내 문서 보기-->
+    <a href="a.html">a 문서 보기</a><br>
+    <a href="a.html" target="_new">a 문서 보기(새탭) : _new</a><br>
+    <a href="a.html" target="_blank">a 문서 보기(새탭) : _blank - 많이사용</a><br>
+    <!-- 외부 문서 보기-->
+    <a href="https://kbs.co.kr">kbs가기</a><br>
+    <!--하이퍼 텍스트를 이미지로 주기: 하이퍼 이미지 -> 마우스포인터 손가락모양-->
+    <a href="a.html"><img src="images/cat.jpeg" width="100"></a><br>
+    <!-- 브라우저가 해석 할 수 있는 파일 읽어들임-->
+    <a href="god.txt">text 문서보기</a><br>
+    <!-- 브라우저가 해석 할 수 없는 파일: 다운로드 됨-->
+    <a href="mydb.dat">mydb 문서보기</a><br>
+
+    <a href="mailto:jwawa129@gmail.com">모바일에서 이메일 작성으로 넘어감</a><br>
+
+    <br><br>
+    <h4>경로 연습</h4>
+    <pre>[파일경로 : 내 기준이 중요]
+    kbs/aa.html
+        └sbs/cc.html
+    mbc/bb.html
+    </pre>
+    <!--/ = root-->
+    <a href="kbs/sbs/cc.html">sbs의 cc보기 : 상대경로 - 경로 파일 이름바뀌어도 쓸 수 있어</a><br> 
+    <a href="/pro3web/pack1/kbs/sbs/cc.html">sbs의 cc보기 : 절대경로 - 경로 파일 이름바뀌면 못씀 </a><br>
+    <br><br>
+    <h4> iframe 연습 : 프레임을 추가할때 사용 </h4>
+    <a href="a.html" target="tiger">a 문서보기</a><br>
+    <!-- 
+        사이에 쓸 하이퍼문자가 없으면 그냥 <시작 />닫으면됨.
+        height는 % 불가 절대적인 크기만 가능
+        기본 프레임은 duam이고 a 문서보기를 누르면 프레임 안에 a.html이 들어감.
+    -->
+    <iframe src="https://www.daum.net" width=98%" height="150" name="tiger"/>
+</body>
+</html>
