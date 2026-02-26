@@ -1,0 +1,38 @@
+/* CSS적용 방식 : External방식*/
+/*id가 myid2인녀석의 스타일을 지정함.*/
+#myid2{
+    background-color: blanchedalmond;
+    color: darkblue;
+    font-size: 20px;
+}
+
+/* 동적 선택자 focus를 가진부분 색깔 변경
+    -여러개에 요소가 있지만 focus(커런트)는 하나*/
+    /*
+        color 주는 방식
+        16진수(HEX) : #aabbcc;
+        색깔 이름   : silver;,
+        rgb         :rgb(255,255,0) or rgb(100%,100%,0%s)
+    */
+/*포커스 위치 색깔 변경*/
+input:focus{background-color:rgb(100%,100%,0%);}
+/* 하이퍼링크 밑줄 없애기*/
+a:link{text-decoration: none;}
+/*마우스 over-out(올려놓으면 바뀜)*/
+a:hover{color: orange; font-size: 30px;}
+
+/*선택(selecter) 연습 ** JS에서도 사용*/
+
+b{font-size: 10px;}
+    /*  
+        div b :자손
+        div > b : 직계 자식
+        div b#hi : b태그중에서 아이디가 hi
+        div b.hello : b태그중에서 클래스가 hello
+    */
+    /*div태그 안에 있는 자손들 모두 해당*/
+div b{font-size: 20px;}
+    /* div 태그 직계 자식만 해당*/
+div > b{font-size: 30px; color: blue;}
+div b#hi{font-size: 40px;}
+div b.hello{font-size: 50px;}
