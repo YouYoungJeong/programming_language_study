@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 인터널 방식 스타일 지정-->
+    <!--style안에 html주석 넣으면 적용 잘 안됨 주의!-->
+    <style type="text/css"> 
+        /*body영영내 h1태그는 전부다 바꾸겠다*/
+        h1{
+            font-size: 40px;
+            font-family:궁서;
+            color: chocolate;
+        }
+        h2,strong{
+            font-size: 18px; 
+            color:blue;
+        }
+        /*
+        class는 "." 으로 받음, 중복이 가능
+        클라이언트 컴퓨터 기준 폰트, 먼저 적은 폰트먼저 적용됨.
+        돋움 없으면 궁서, 궁서 없으면 serif.... 글꼴 이름에 공백이 있으면 "" 안에 넣어주기
+        */
+        .c1 {color: silver; font-family:돋움,궁서,serif,"Times New Roman";}
+        /*id는 # 으로 받음*/
+        #myid1{
+            color: violet; font-style:italic;
+        }
+    </style>  
+    <!-- External style arrange-->
+    <link rel="stylesheet" type="text/css" href="css/ex.css"/>
+
+</head>
+<body>
+    <h3>스타일 시트</h3>
+    <pre style="font-size: 15px;">
+        HTML 문서에 다양한 레이아웃과 꾸미기는 위한 표현적인 언어 CSS 사용
+        서식 : 선택자{속성:값; ....}
+        선택자 종류는
+            1) 요소명 : body tag 내의 특정 tag를 직접 지적해서 선택
+            2) .      : class 선택자 - 클래스 속성값으로 보유하고 있는 요소를 선택
+            3) #      : id 선택자로 단수 선택 가능
+        * 스타일은 하위 요소에 상속된다
+
+        CSS 적용 방법 : inline, internal - 현재 사용하고있는 html파일에만 적용
+                        external    - 여러개의 HTML파일에 동일한 css를 적용하고싶을때
+                                    별도의 폴더로 파일을 적용하는게 좋다.
+    </pre>
+    <hr>
+        <!--
+        <b>==<strong>: 글씨 굵게 - 이런식으로 간단한 스타일은 HTML에서 제공됨
+        더 다양한 스타일을 구사하고싶을때 CSS 사용
+        -->
+        *** <b>css</b> 적용<strong>하기</strong> ***<br>
+        <!--
+        <span>: 원하는 위치 직접 범위 지정 
+        <div> : 행전체(블록) 범위 지정 - 끝지점 자동 줄바꿈.    
+        -->
+        <!--W3C가 싫어하는 스타일(표준에서 벗어나기 때문에) 하지만 가독성이 좋다.-->
+        <span style="font-size: 30px; color:cadetblue;">인라인 방식</span>
+        (해당 요소 직접 스타일 지정)
+        
+        <h1>인터널 방식(내부스타일 지정)</h1>
+        <h2 >안녕하세요</h2>
+        <!--인라인이 우선이다!-->
+        <h1 style="color: yellowgreen;">반가워요</h1>
+
+        <p class="c1">클래스 사용1 - class명 중복 가능</p>
+        <h2 class="c1">안녕하세요2 - 클래스 사용2</h2>
+
+        <p id="myid1">아이디 사용 - id명 중복 불가(W3C에서 중복 id 주지말라고 함.)</p>
+        <div id="myid2">아이디 사용 : div에 적용함</div>
+        <p>* 입력 양식 작성 *</p>
+        <!--여러개에 요소가 있지만 focus(커런트)는 하나-->
+        <form>
+            <table>
+                <tr>
+                    <td>아이디 : </td>
+                    <td><input type="text" name="id"></td>
+                </tr>
+                <tr>
+                    <td>비밀번호 : </td>
+                    <td><input type="text" name="pwd"></td>
+                </tr>
+            </table>
+        </form>
+    
+    <!--a태그 안 하이퍼태그 밑줄 없애기->스타일로 가능 text-decoration: none -->
+    <br>
+    <a href="https://naver.com">네이버 : com:  상업용-전세계용</a><br>
+    <a href="https://kbs.co.kr">kbs : co.kr: 상업용-국내용</a>공영방송<br>
+    <hr>
+    <h3>selecter연습 CSS의 selecter 선택하는게 중요!</h3>
+    <b>b tag</b>
+    <div><b>div-b tag</b></div>
+    <div><span><b>div-b-span tag</b></span></div>
+    <div><b id="hi">div-b tag : id-hi</b></div>
+    <div><b class="hello">div-b tag: class-hello</b></div>
+
+
+</body>
+</html>
