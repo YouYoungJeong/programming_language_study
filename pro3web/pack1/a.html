@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- 
+HTML Favicon Err는 아이콘을 안만들어서 404Err가 뜨는데 한번만 뜨고 안뜸. 
+Visualstudio code에서 Live Server (HTTP Server) 사용하기 : https://cafe.daum.net/flowlife/OLrk/1
+다운후 우측하단 GO Live 클릭하면 서버 실행 Port:5500 뜨면 실행중
+HTML 창 안에서 우클릭하고 Open with Live Server클릭하면 실행.
+-->
+<html lang="en">
+<head> <!-- 
+        선언구 : '어떤 정보를 가지고 있다'를 선언하는 구간
+        CSS와 JS를 쓰는 구간이 이곳!
+        -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 기본적인 코드 정리</title>
+</head>
+<body>
+    <!-- 실행구 -->
+    Tag : 문서의 구조와 형태를 표현하는 명령어로 <>안에 적는다.</br>
+    <!-- 아무리 띄어쓰기해도 한칸씩만 띄워짐. 띄어쓰기 : &nbsp;-->
+    aaa                 bbb             ccc </br>
+    aaa &nbsp; bbb &nbsp; ccc
+    <!-- 
+        엔터 <br></br>
+        원래 원칙은 -> <br></br>, 브라우저는 <input>, <br>만 예외로 인정해줌
+        <form>, <br>
+    -->
+    <br></br>
+    aaa
+    <b>good</b></br>
+    
+    ---출력 형태에 따른 태그 종류--- </br>
+    1) Block방식 : 행분리가 이루어짐 : p, h, div, ol, li ,.... <br>
+    2) inline방식 : 같은 행에 계속 출력 : b, i, span ,...<br> <!-- HTML 주석 -->
+    <hr><!-- 수평선 -->
+    Block방식<br>
+    <b><p>문단나누기</p></b>
+    <!--요즘은 시멘틱 테그 사용 권장-->
+    <div style="background-color:rgba(127, 255, 212, 0.267);">
+        구역설정 태그(행 전체- 자동 라인스킵)</div>good
+    
+    <br></br>
+    Inline방식<br>
+    <i>이텔릭으로 표시 : 표제용 태그(Bold + 글씨크기 자동)</i>
+    <h1>표제용 제목 가장 큰 글씨</h1>
+    <h6>표제용 글씨 가장 작은 글씨</h6>
+    <span style="background-color: rgba(172, 97, 168, 0.349);">
+        구역설정 태그(일부 영영만-라인스킵 X)</span>good
+    <br>
+    <!-- 태그 안에 글씨 쓰기 <>안에 쓰면 어떤 브라우저는 출력이 안됨.
+        &lt;&gt; 사용 -->
+    특수문자 사용 (이스케이프 문자)<br>
+    <b>&lt;하하하&gt;</b><br>
+    <!--tag에 속성부여, 무조건 ""을 두름. 
+        tag마다 속성주는 방식이 다름 -->
+    <hr size="5" width="200" color="blue">
+    <hr width="60%" color="#00ff00"> 
+    <!--
+        % : 상대적으로 수평선의 넓이가 달라짐.
+        반응형 웹(Responsive Web), 지능형 웹?
+            PC, 태블릿, 스마트폰 등 다양한 기기의 화면 크기에 실시간으로 반응하여, 
+            레이아웃과 콘텐츠를 자동으로 최적화해 보여주는 웹 디자인 방식
+    -->
+    <pre>
+        내가        입력한
+            대로    그  대  로
+                    보 여 줘
+
+    </pre><br>
+    ---목록 만들기---<br>
+    ul만 사용한 목록태그, li은 ul안에서만 사용가능한 목록태그
+    <ul>
+        <li>파이썬</li>
+        <li>마리아 디비</li>
+        <ul>
+            <li>파이썬</li>
+            <li>마리아 디비</li>
+        </ul>
+    </ul>
+    ol 사용하기<br>
+    <ul>
+    <ol>
+        <li>파이썬</li>
+        <li>마리아 디비</li>
+        <ol>
+            <li>파이썬</li>
+            <li>마리아 디비</li>
+        </ol>
+    </ol>
+    </ol>
+    </ul>
+
+</body> 
+        <!--
+            <> == 마킹 -> 마킹을 해서 작업을 하는 언어다 = 마크업 랭귀지
+            태그, 엘리먼트, 요인
+            HTML은  ROOT TAG - 트리형식으로 구성 되어 있다.
+            https://zindex.tistory.com/33
+            DOM (Document Object Model) :  
+            HTML내 원하는 위치에 접근하기 위한 하나의 방식, W3C의 표준
+            문서 객체 모델(DOM)은 문서 내의 모든 요소를 정의하고, 각각의 요소에 접근하는 방법을 제공한다.
+            돔트리:브라우저가 HTML 웹 페이지를 인식하는 방식을 계층화시켜 트리구조로 만든 객체(Object) 모델
+        -->
+</html>
