@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- python과 차이점을 잘봐!-->
+    <h3>조건판단문</h3>
+    <h4>if문</h4>
+    <script>
+        // prompt = input(비슷)
+        // let ave = prompt("평균 점수 입력 :","80")    
+        // document.write("ave : ", ave);
+        let ave1 = 65;
+        if(ave1 >= 90) 
+            document.write("점수 : " + ave1 + "이므로 <b style='color:blue'>우수</b>");
+        else if (ave1 >= 70) 
+            document.write("점수 : " + ave1 + "이므로 <b style='color:green'>보통</b>");
+        else 
+            document.write("점수 : " + ave1 + "이므로 <b style='color:red'>저조</b>");
+        document.write("<br>")
+
+        let ave2 = 85;
+        if(ave2 >= 90) 
+            document.write("점수 : " + ave2 + "이므로 <b style='color:blue'>우수</b>");
+        // 수행할 명령문이 복수일 경우 중괄호 안에 적음
+        else if (ave2 >= 70){
+            document.write("점수 : " + ave2 + "이므로 <b style='color:green'>보통</b>");
+            document.write("&nbsp;&nbsp;와우")
+        }
+        else 
+            document.write("점수 : " + ave2 + "이므로 <b style='color:red'>저조</b>");
+    </script>
+    <h4>switch문</h4>
+    <script>
+        //let 쓰는순간 result는 계속 새로운값이 들어오겠구나~ 라고 생각
+        // 여러 조건이 있으면 수행영역을 {block}로 정해야함.
+        //default문 생략가능
+        let result = "D" //학점 기억 변수
+        switch(result){
+            case "A": {
+                document.write("매우 우수");
+                document.write("good");
+                break;
+            }
+            case "B": document.write("우수"); break;
+            case "C": document.write("보통"); break;
+            case "D": document.write("저조"); break;
+            case "F": document.write("불량"); break;
+            default : document.write("기타"); break;
+        }
+        document.write("<br>case문 오픈하는 경우<br>")
+        switch(result){
+            case "A": {
+                document.write("매우 우수");
+                document.write("good");
+                break;
+            }
+            case "B": document.write("우수"); break;
+            case "C": document.write("보통"); break;
+            case "D": // 찍고 내려감.
+            case "F": document.write("불량"); break;
+            default : document.write("기타"); break;
+        }
+    </script>
+</body>
+</html>

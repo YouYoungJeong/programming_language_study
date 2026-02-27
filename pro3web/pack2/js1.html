@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>** 자바 스크립트 : 클라이언 사이드 스크립트**</h3>
+    <!-- ↑지금까지는 html이야-->
+    <!-- -->
+    <script>
+        // : 한줄 주석
+        /**
+         *  : 여러줄 주석
+        */
+    
+        // 브라우저 화면으로 출력
+        // document : 브라우저 출력할때 사용(클래스 객체임)
+        // document.write(이안은 HTML이야);
+
+        window.document.write("환영합니다. JS 세상"); 
+
+        /**python의 print와 유사 웹(f12) 콘솔로 출력 
+         * 브라우저에서 에러확인을 위해 콘솔창을 열어 놓고 작업해야함*/
+        console.log("개발자를 위해 표준 출력 장치로 출력");
+        document.write("<h2>브라우저에 문자열 출력</h2>");     
+    </script>
+    다시 html로 나옴<br>
+    <script>
+        document.write("이거는 자바 스크립트;")
+
+        let a = 10;
+        let b = a + 10;
+        document.write("<br>b는", b);
+    </script>
+    
+</body>
+</html>
