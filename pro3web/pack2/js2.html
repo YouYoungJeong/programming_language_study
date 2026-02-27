@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 style="color: darkgreen;">[변수와 연산자]</h3>
+    <h4>변수</h4>
+    <script type="text/javascript">
+        /* 변수 선언 : 변수 선언을 규칙으로 하고 있다.*/
+
+        var ab; // 전통적인(레거시) 변수 선언 방식 잘 안씀
+        ab = "오래된 변수 선언방법 ->  var"
+        
+        let aa;        
+        aa = 100;
+        
+        let bb = 20.5; // 모던(morden)한 변수 선언 - 많이사용한다는 뜻
+        document.write(aa, "<br>",ab);
+
+        const cc = 300;  //한번 고정된 변수를 선언 상수를 선언 - 수정불가
+        bb = bb + 10;
+        // cc = cc + 10; // TypeError
+        document.write("<br>", aa," , ", bb," , " ,cc, "<br>");
+
+        let dd = false;
+        let msg = "변수 선언 이해"
+        document.write(dd, "<br>", msg);
+
+        document.write("<hr>")
+        document.write("type 확인 - 자료형 확인 : <br>"," typeof(1)" , " : " , typeof(1) , " , <br>" , 
+                                                    " typeof(-1.5)" , " : " ,typeof(-1.5), " , <br>" , 
+                                                    ' typeof("안녕")' , " : " ,typeof("안녕") , " , <br>" , 
+                                                    " typeof(null)" , " : " ,typeof(null), " , <br>" , 
+                                                    " typeof(undifined)" , " : " ,typeof(undifined),"<br><br>" );
+        
+        //영역 내에서 변수 선언 (참고 : var v1 = 1; - 전역 변수 취급해서 (좋은 방법이 아님.))
+        document.write("영역변수:<br>")
+        {
+            let v1 = 1; // <- 지역변수  
+            document.write(v1,"<br>");
+            {
+                let v2 = 2;
+                document.write(v2,"<br>");
+                {
+                    let v3 = 3;
+                    document.write(v3,"<br>");
+                }
+            }
+        }
+        /*영역내에서 선언했기 때문에 영역 밖에서 선언할 수 없다
+            ReferenceError 영역 밖에 있어서*/
+        //document.write("<br>", v1,' ',v2,' ', v3,' ') 
+    </script>
+    <hr><h4 style="color: darkmagenta;">연산자</h4>
+    <script>
+        // 한줄에 변수 여러개 선언 방법
+        let x =5 , y = 2;
+        document.write("x = ",x," <br> ","y = ",y ,"<br><br>")
+        document.write("산술연산자 : <br>",
+                        "x + y = ", x + y," <br> ", 
+                        "x / y = ", x / y, "<br> ", 
+                        "x % y = ", x % y,"<br><br>");
+        document.write("관계(비교) 연산자 : <br>", 
+                        "x > y= ",x > y,"<br> ",
+                        "x <= y = ",x <= y," <br> ",
+                        "x==y = ",x==y," <br> ", 
+                        "x != y = ", x != y,"<br><br>");
+        document.write("논리 연산자(&&-and, ||-or) : <br>",
+                        "x>y && x<=y = ",x>y && x<=y,"<br>",
+                        "x>y || x<=y = ",x>y || x<=y,"<br><br>");
+        document.write("누적 연산:" , " <br> ",
+                        "x = x + 1 ==> ",x = x + 1, 
+                        " <br> ","++x ==> " ,++x , 
+                        " <br> ","x += 1 ==> ",x += 1,"<br><br>");
+        document.write("삼항연산:<br> (조건이 참이면 ?다음, 거짓이면 :다음을 수행한다)<br>", 
+                        "(x > y)?1000:1000+2000) ==> ", (x > y)?1000:1000+2000,"<br><br>");
+        // 연산자 우선순위는 py와 동일
+        document.write("문자열 더하기 : <br>","a" +"b"+"c<br><br>") // 문자열 더하기
+        let m , b, c ;
+        m = b = c = 6 + 5; 
+        document.write("할당 연산(chaining) :<br> m = b = c = 6 + 5 ==>",m," , " ,b," , ", c) //할당 연산(체이닝chaining)
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>반복문 for(초기값;조건;증가값)</h3>
+    <hr><h4>단일 for문</h4>
+    <script>
+        let a = 1;
+        // js는 문자열 + 숫자열 가능
+        for(a=1; a <= 5; a=a+1){
+            document.write("a(a=a+1) 값은 "+ a+ "<br>"); // a <= 5;가 참인동안 수행
+        }
+        document.write("for 블럭 수행후(변수를 바깥에서 선언한 경우 마지막 수행값) a값은 "+ a+ "<br>");
+
+        document.write("<br>");
+        
+        for(let b = 1; b <= 5; b+=1){
+            document.write("b(b+=1) 값은 "+ b+ "<br>");
+        }
+        // err 지역변수 선언 못함.
+        // document.write("for 블럭 수행후(변수를 안에서 선언한 경우 마지막 수행값) b값은 "+ b+ "<br>");
+        document.write("<br>");
+        // c++:이 방식을 가장 많이 사용
+        
+        for(let c = 1; c <= 5; c++){
+            document.write("c(c++) 값은 "+ c+ "<br>");
+        }
+        document.write("<br>");
+        
+        for(let d=5; d >= 1; d--){
+            document.write("d(d--) 값은 "+ d+ "<br>"); 
+        }
+        document.write("<br>");
+        
+        for(let e=3; e < 11; e += 2){
+            document.write("e(e += 2)) 값은 "+ e+ "<br>");
+        }
+    </script>
+    <h4>1 ~ 10 까지의 정수합은?</h4>
+    <script>
+        let hap=0; //누적변수 초기화
+        for(let su = 1; su <= 10; su++){
+            hap += su // hap = hap + su
+        };
+        document.write(hap)
+    </script>
+    <h4>1 ~ 100 까지의 정수중 2의 배수이나 5의 배수가 아닌수의 합 출력</h4>
+    <script>
+        let hap2=0; //누적변수 초기화
+        /*권장 사항
+        == : 느슨한동등비교(타입을 자동으로 변환하여 값만 비교,속도가 느려짐) - 비권장
+        === : 엄격한일치비교(값과 데이터 타입이 모드 같아야 true를 반환)*/
+        for(let su2 = 1; su2 <= 100; su2++){
+            // if(su2%2==0 && su2%5!=0) hap2 += su2
+            if(su2%2===0 && su2%5!==0) hap2 += su2 //권장
+        };
+        document.write(hap2+"<br>");
+        
+        let hap3 =0;
+        for(let su3 = 0; su3 <= 100; su3+=2){
+            if(su3%5!==0) hap3 += su3 
+        };
+        document.write(hap3)
+    </script>
+    <hr><h4>다중for문</h4>
+    <script>
+        for(let i=1; i <= 3; i++){
+            document.write("i 값은 => "+ i + "&nbsp;&nbsp;");
+            for(let j = 1; j <=4; j++){
+                document.write("j : "+ j + ",&nbsp;&nbsp;");
+            }
+            document.write("<br>");
+        }
+    </script>
+    
+    <h4>2~9 구구단 출력 = table에 출력</h4>
+    <script>
+        document.write("<table>")
+            for(let a=2; a <10; a++){
+                document.write("<tr>");
+                for(let b=1; b<10; b++){
+                    // document.write("<td>");
+                    // document.write(a + "X" + b + "=" + a*b);
+                    // document.write("</td>");
+                    // 신문법!! " `` " : 템플릿 문자열 `: 백틱?
+                    document.write(`<td>${a}*${b}=${a*b}&nbsp;&nbsp;</td>`)
+                }
+
+            }
+            document.write("</tr>");
+        document.write("</table>")
+    </script>
+</body>
+</html>
