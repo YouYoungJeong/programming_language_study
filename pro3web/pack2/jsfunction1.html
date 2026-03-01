@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsFunction1</title>
+    <script type="text/javascript">
+        function bb(){
+            document.write("bb 함수 실행 성공");
+            // 반환값 처리
+            let re = cc(5);
+            document.write(`<br> re는 ${re}`);
+
+            // dd함수 호출
+            dd(7,8);
+            dd(7,8,9);// 세번째 인자는 무시
+            dd(7); // 7 undifiend
+            }
+
+            /*매개변수가 있는 함수 1*/
+            function cc(para){
+                let kk = para + 10;
+                document.write(`<br>kk는 ${kk}`);
+                return kk;
+            }
+            /*매개변수가 있는 함수 2*/
+            function dd(para1, para2){
+                document.write(`<br>dd함수에서 ${para1} ${para2}`);
+            }
+
+            /*전역 지역변수에 대해서*/
+            let a = 100;                // 전역 변수
+            const b = 200;              // 전역 상수
+            
+            function func(){
+            let c = 100;                // 지역변수
+            const d = 200;              // 지역상수
+            document.write(`<br>a는  ${a}, b는 ${b}`);
+            document.write(`<br>c는  ${c}, d는 ${d}`);
+            }
+    </script>
+</head>
+<body>
+    <h3>함수(Function)</h3>
+    <pre style="font-size:17px;">
+        함수 : 어떤 특별한 목적의 작업을 수행하도록 설계된 독립적 블록{}을 의미
+        js는 일급객체 지원 - python과 동일
+            -> 함수가 함수를 호출할 수 있다.매개변수 함수 전달 가능, 반환값 함수 가능
+    </pre>
+    <hr>
+    <h4>내장 함수</h4>
+    <script>
+        /*js내장 함수*/
+        let str = "javaScript Language";
+        document.write(`<br>str.charAt(index): ${str.charAt(2)}`);
+        document.write(`<br>str.bold() : ${str.bold("")}`);
+        document.write(`<br>Math.abs(-7) : ${Math.abs(-7)}`);
+        // ...그외 다수
+    </script>
+    
+    <hr>
+    <h4>사용자 정의 함수</h4>
+    <script>
+        let count = 0;
+        // 함수 선언
+        function aa(){
+            count += 1;
+            document.write(`${count} 번 수행<br>`)
+        }
+        // 함수 실행
+        aa();
+        document.write("뭔가를 하다가...<br>");
+        aa();
+        document.write(`함수는 참조형 타입 : ${typeof(aa)}`);
+    </script>
+    
+    <br><div>오늘은 금요일, 고생했다 한 주</div><br>
+    <script>
+        aa();
+    </script>
+    
+    <hr size="5">
+    <div><b>생각의 전환:html 선언부에 js코드(함수) 작성후 호출하기</b></div>
+    <script>
+        bb();        
+    </script>
+    
+    <br><div>전역/ 지역 변수</div><br>
+    <script>
+        func();
+        document.write(`<br>전역 변수 <br>a는 ${a}, b는 ${b}`);
+        // document.write(`<br>지역 변수 <br>c는 ${c}, d는 ${d}`); //err
+    </script>
+</body>
+</html>
