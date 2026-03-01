@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsfunction2</title>
+</head>
+<body>
+    <h3>js의 대화 상자 관련 함수</h3>
+    <script>
+        let irum = "홍길동";
+        let tel = "111-1111";
+        //메세지창 출력
+        alert("이름은 " + irum + "\n전화는 " + tel );
+
+        document.write("<br>alert 함수 수행 후 계속");
+
+        //선택 창
+        let result = confirm("계속할까요?");
+        document.write("<br>선택한 값은 " + result); //true, false
+
+        let juso = prompt("사는곳을 입력");
+        // let juso = prompt("사는 곳을 입력", "테헤란로"); //확인후 미리 값을 줄 수 있다.
+        document.write(`<br>사는곳 : ${juso}`);
+    </script>
+</body>
+</html>
