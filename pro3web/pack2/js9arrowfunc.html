@@ -55,13 +55,16 @@
 
         /*삼항연산자 사용한 arrow function*/
         let age = 25;
-        let welcome = (age <=30)?()=>document.write("안녕"):document.write("반가워");
+        // let welcome = (age <=30)?()=>document.write("안녕"):document.write("반가워"); //가독성이 떨어짐
+        let welcome= (age<=30)
+        ? () =>document.write("안녕")
+        : () =>document.write("반가워");
         welcome();
         document.write("<br>");
 
         // 두개가 완전히 다른거
-        // let a = welcome();
-        // let a = welcome
+        // let a = welcome();   // 실행 결과를 a에 저장
+        // let a = welcome      // 함수 자체를 a에 저장
 
         let sumFunc=(a, b) => {
             let result = a + b;

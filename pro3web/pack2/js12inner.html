@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inner</title>
+        <!-- 
+        
+        -->
+    <script type="text/javascript">
+        function func1(){
+            // alert("func1"); // 잘 넘어갔는지 확인할때 사용하면 좋다
+            // let str2 = document.getElementById("test1").innerHTML;
+            // console.log(str2);
+            
+            // // CSS  selector을 쓰는 방법을 좋아함.
+            let str1 = document.querySelector("#test1").innerHTML;
+            console.log(str1);
+            // 출력1에 값을 주기
+            document.querySelector("#show1").innerHTML = str1;
+
+            let tag1 = "이름:<input type='text' name='irum'>";
+            let tag2 = "나이:<input type='text' name='nai'>";
+            //innerHTML 연습을 tag1, tag2로 바꿈.
+            document.querySelector("#test1").innerHTML = `${tag1} <br> ${tag2}`;
+  
+        }
+
+        function func2(){
+            // alert("func2"); // 잘 넘어갔는지 확인할때 사용하면 좋다
+            let str2 = document.querySelector("#test2").innerHTML;
+            console.log(str2);
+            // 출력2에 값을 주기
+            document.querySelector("#show2").innerText = str2;
+        }
+
+    </script>
+</head>
+<body>
+    <!-- 
+    ** 실행중 tag 의 생성, 삭제, 데이터의 참조, 수정, 삭제 처리 가능 명령 **
+    element.innerText : 이 속성은 element안의 text 값들만 대상으로 처리
+                - innerText 는 그냥 text로 출력을함. 해석을 안함.
+    element.innerHtml : element 안의 텍스트 뿐만 아니라 HTML, 이나 XML을 대상으로 처리
+                        마이크로소프트가 만듦.
+                        보안의 문제가 있기 때문에 insertAdjacentHTML을 사용하기도 함.
+        - innerHTML은 클라이언트 화면만 바뀜. 
+            ->  화면상에서 바뀌는 데이터를 받거나 보낼수 있다. 
+                서버는 변경이 없다.
+                원래는 DOM을 사용함. 근데 innerHTML을 더 많이 사용함.
+                출력을 하면 알아서 파싱을 해서 해석된 결과를 출력할때 사용
+           
+         
+    insertAdjacentHTML와 innerHTML 차이점
+        insertAdjacentHTML와 innerHTML은 둘 다 JS를 사용해서 HTML 코드를 DOM에 넣어 조작하는 메서드다. 
+    -->
+    <div id="test1"><h2>innerHTML 연습</h2></div>
+    <div id="test2"><h3>안녕하세요</h3></div>
+    <input type="button" value="처리1" onclick="func1()">
+    <input type="button" value="처리2" onclick="func2()">
+    <br>
+    <div id="show1">출력 1</div>
+    <div id="show2">출력 2</div>
+</body>
+</html>

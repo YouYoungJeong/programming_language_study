@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event3</title>
+    <script type="text/javascript">
+        /* 다양한 기능들이 있는데 그중 일부만 보여줌 기능이 진짜 많아!*/
+        function func1(){
+            // alert("func1");
+            document.getElementById("show").innerHTML = "전통적인(전형적) 이벤트 처리";
+        }
+
+        let a = 10;
+        /*b의 객체로 함수(매서드) funcNew1, funcNew2를 가지고 있음*/
+        let b =  {
+            funcNew1: function() {
+                document.getElementById("show").innerHTML = `b 객체의 메소드(함수) 처리`;
+            },
+            funcNew2: function() {
+                document.getElementById("show").innerHTML = `<h1>b 객체의 멤버 수행</h1>`;
+            }
+        }
+    </script>
+
+        <!-- ** 새로운 언어 설명, 말해보기!
+            onload   : 1회용 - 함수의 초기화를 담당, 
+            callback :수신을 담당, 시스템에 의해 호출됨.
+            exBtn1 - camal, ex_btn1 - snaketail,
+        -->
+    <script>
+        // window.onload = alert("ok");                     // load이벤트가 발생
+        
+        window.onload = function(){     
+        // alert("ok");                                 // 서버로 부터 문서 수신이 완료되면 함수 수행(1회용, 초기화 담당, callback함수)
+        const exBtn1 = document.getElementById("btn1"); //특정 버튼을 읽어 변수에 기억
+        exBtn1.onclick = function(){                    // 이벤트 장착
+            document.getElementById("show").innerHTML = '클릭1 선택';
+        }
+
+        /*
+        getElementById = 복수 불가능해서 Element
+        getElementsByName = 복수가능해서 Elements, 자동으로 array됨.
+        */
+        // 배열로 처리
+        const exBtn2 = document.getElementsByName("myBtn"); // 배열에 기억
+        console.log(exBtn2.length); // 2개
+        exBtn2[0].onclick= function () {
+            document.getElementById("show").innerHTML = '<i>클릭2 누름</i>';
+        }
+        exBtn2[1].onclick= function () {
+            document.getElementById("show").innerHTML = '클릭3 누르다니';
+        }
+
+        // TagName으로 출력하기 지금 <body>에 botton5개 사용하는것 중 4번째 botton
+        const exBtn4 = document.getElementsByTagName("button")[3];
+        exBtn4.onclick=function(){
+            document.getElementById("show").innerHTML = '<b>클릭4 선택함</b>';
+        }
+        
+        //이벤트 연결 및 해제
+        /*
+        addEventListener("이벤트 종류 - on쓰면 안돼", 핸들러함수); 
+        - 이벤트 종류가 발생하면 핸들러함수로 갈꺼야 ()쓰면 안돼.
+        - 이벤트 해제가 가능
+        - add핸들러도 있나?
+        removeEventListener("이벤트 종류 - on쓰면 안돼", 핸들러함수);
+        */
+        // 이벤트 핸들러 연결
+        document.getElementById("btn5").addEventListener("click", abcFunc);
+        }
+        function abcFunc(){
+            // alert("abc")
+            document.getElementById("show").innerHTML = '클릭5 이벤트 연결 처리';
+        // 이벤트 해제 - 한번 클릭하면 그다음부턴 클릭 안됨.
+            document.getElementById("btn5").removeEventListener("click", abcFunc);
+        }
+
+    </script>
+</head>
+<body>
+    <h2>이벤트 처리 : 이벤트 핸들러 연결</h2>
+    <input type="button" value="버튼1" onclick="func1()"><br>
+    <input type="button" value="버튼2" onclick="b.funcNew1()"><br>
+    <input type="button" value="버튼3" onclick="b.funcNew2()"><br>
+    <hr>
+    <!--출력공간 확보-->
+    <div id="show">출력공간</div><br>
+
+    <hr>
+    <!--
+        <button id="btn1" onclick="이벤트처리함수()">클릭1</button><br> 
+        === 
+        <input type="button" value="버튼1" onclick="func1()"> 
+        <-- W3C가 싫어하는 방식, 
+        별도의 외부파일로 만드는 방식이 제일 좋은방식
+        그러면 js로 받으면 됨. -> id만 주기
+    -->
+    <button id="btn1" onclick="이벤트처리함수()">클릭1</button><br>
+    <button id="btn2" name="myBtn">클릭2</button><br>
+    <button id="btn3" name="myBtn">클릭3</button><br>
+    <button id="btn4">클릭4</button><br>
+    <button id="btn5">클릭5</button><br>
+    <div id="show"></div>
+</body>
+</html>
