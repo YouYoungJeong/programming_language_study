@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event4</title>
+
+    //<!-- 여러 중요한 이벤트 경험하기 -->
+    <script type="text/javascript">
+        // window.onload = function(){};
+        window.onload = () => {
+            // alert("a");
+            document.getElementById("colorW").onclick = function(){
+                // alert("a");
+                document.body.style.backgroundColor = "white"
+                }
+            
+            document.getElementById("colorG").onclick = () => {
+                // alert("b");
+                document.body.style.backgroundColor = "#00ff00"; // === #0f0
+                }
+            
+            // document.querySelector("#colorR").onclick = ()=>{
+            document.getElementById("colorR").onclick = () => {
+                // alert("c");
+                document.bgColor = "red" // === rgb(0%, 100%,  0%)
+                // document.body.style.backgroundColor가 오리지널
+                // document.body.style.backgroundColor = "rgb(0,255,0)" <-- 안됨..
+                }
+    
+    //<!-- 이벤트 종류 W3C의 권고사항때문에 이곳에 쓰겠다.-->
+    
+        document.querySelector(".hello").onclick = () => {
+            document.querySelector("#show").innerText = "안녕하세요";
+        }
+
+        document.querySelector("#calc").ondblclick = function(){
+            let ss = `연산 결과는 ${10 + 20}`;
+            document.querySelector("#show").innerHTML = ss; 
+        }
+
+        // over 다음에 out을 해줘야함
+        document.querySelector("#name").onmouseover = () => {
+            document.querySelector("#show").innerHTML = "<h2>난 홍길동</h2>";
+        }
+        document.querySelector("#name").onmouseout = () => {
+
+        }
+        // a tag : click 이벤트가 기본 장착됨
+        document.querySelector("#daum").onclick = function(event){
+            event.preventDefault(); // 해당 태그의 고유 기능( a tag, submit, reset 등)
+            console.log(event);
+            document.title = "새로운 제목"; // a tag의 기능을 죽이고 따른 기능을 넣음.
+        }
+    
+    // <!-- select -->
+            const sdata = document.querySelector("#sel");
+        //항목을 선택시 이벤트 발생(onclick)
+            /*sdata.onclick = function(){
+            document.querySelector("#show").innerHTML = sdata.value;    
+            }*/
+        // 항목이 바뀌면 이벤트 발생(onchange - 일반적으로 많이 사용)
+            sdata.onchange=function(){
+                document.querySelector("#show").innerHTML = sdata.value;    
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>여러 중요한 이벤트 경험하기</h3>
+    <input type="button" value="흰색" id="colorW">
+    <!--
+    <input type="button" value="녹색" id="colorG">
+    <input type="button" value="적색" id="colorR">
+    -->
+    <span id="colorG"> 녹색 </span>
+    <!-- 
+        style =  
+        cursor: pointer 마우스 포인터 손가락 모양
+    -->
+    <b id="colorR" style="border: 2px solid black; cursor: pointer;"> 적색 </b><hr>
+
+    <h4>이벤트 종류</h4>
+    <button id="'hello" class="hello">인사하기(cilck)</button>
+    <button id="calc"> 계산하기(double cilck)</button>
+    <button id="name"> 이름알기(mouse over)</button>
+    <br>
+    <hr>
+    <div id="show">여기가 출력 장소</div>
+    <br>
+    <a href="https://m.daum.net" id="daum">앵커 태그를 클릭</a>
+    <br>
+    <select id="sel">
+        <option value="프로그래머">프로그래머</option>
+        <option value="웹퍼블리셔">웹퍼블리셔</option>
+        <option value="프로게이머">프로게이머</option>
+    </select>
+</body>
+</html>

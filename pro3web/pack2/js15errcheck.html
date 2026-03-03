@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오류 검사</title>
+    <!-- 부트스트랩(bootstrap) 제공 CSS 사용가능 CSS 먼저 쓰고 js 씀.-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script>
+        window.onload = () => {
+            document.querySelector("#btdSend").onclick = chkData;
+            document.querySelector("#btdClear").onclick = clsDataFunc;
+        }
+        /*submit*/
+        function chkData(event){
+            event.preventDefault(); //submit 기능해제
+            // 아래 오류 검사후 이상이 없으면 서버로 자료 전송
+            // isNaN 숫자가 아니면 err
+            if(frm.name.value === "" || isNaN(frm.name.value) === false){
+                frm.name.focus();
+                alert("이름을 입력하세요");
+                return;
+            }
+
+            // 이름 검사
+            if(frm.value/length < 3){
+                frm.id.focus();
+                alert("id는 3글자 이상 입력하세요");
+                return;
+            }
+            
+            //정규 표현식
+            let str = "123Abc가나다45김 asdf1 23길동";
+            console.log(str.match(/[1]/)); // 1 찾기
+            console.log(str.match(/[1]/g)); // 전체 1 찾기 g : global
+            console.log(str.match(/[0-9]/g)); // 숫자만 찾기.
+            console.log(str.match(/\d/g)); // 숫자만 찾기.
+            console.log(str.match(/[0-9 ]/g)); // 숫자 + 공백 찾기.
+            console.log(str.match(/[가-나]/g)); // 한글 가, 나
+            console.log(str.match(/[가-힣]/g)); // 한글 전체 찾기.
+            console.log(str.match(/[가-힣]+/g)); // 한글이 붙어있으면 붙여서
+            console.log(str.match(/\d{2}/g)); // 숫자2자리수.
+            console.log(str.match(/\d{2,3}/g)); // 숫자 2,3 자리수
+            
+            // 이메일 검사 abc@Korea.com : 정규표현식 사용
+            // i : 대소문자 구분 X <- ignore
+            let email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+            // 정규 표현식이 아니면!
+            if(!frm.email.value.match(email_regex)){
+                frm.email.focus();
+                alert("email형식에 맞게 입력하세요");
+                return;
+            }
+
+            //나이 - 숫자 1 ~ 2 길이
+            //^ 제일앞은 숫자여야해, $마지막도 숫자야
+            let age_regex = /^[0-9]{1,2}$/;
+            if(!frm.age.value.match(age_regex)){
+                frm.age.focus();
+                alert("나이는 숫자만 입력하세요");
+                return;
+            }
+            // 입력자료 검사후 에러가 없으면 서버파일 get방식으로 호출
+            frm.action = "my.py"
+            frm.method = "get";
+            frm.submit();
+            /*http://127.0.0.1:5500/pro3web/pack2/my.py?name=홍길동&id=kor&email=abc%40abc.com&age=12 로 넘어감*/
+        }
+        /*reset*/
+        function clsDataFunc(){
+            // alert("b");
+            // reset 기능 + name으로 포커스 이동
+            // frm.name.focus();
+            document.querySelector("#name").focus()
+            return;
+        }
+    </script>
+    <!-- 메세지 박스를  css의 대화상자로 출력 alert 사용하지 X -->
+</head>
+<body>
+    <h3>개인 자료 입력</h3>
+    <!-- <form name="frm" action="서버파일명"> 우리 파일은 CGI가 안됨-->
+    <form name="frm">
+        <table class="table table-dark table-hover">
+            <tr>
+                <td>이 름</td>
+                <td><input type="text" name="name" id="name" placeholder="2글자 이상" value="홍길동"></td>
+            </tr>
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" name="id" id="id" value="kor"></td>
+            </tr>
+            <tr>
+                <td>이메일</td>
+                <td><input type="text" name="email" id="email" value="abc@abc.com"></td>
+            </tr>
+            <tr>
+                <td>나 이</td>
+                <td><input type="text" name="age" id="age"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="submit" id="btdSend" value="자료 전송" class="btn btn-primary">
+                    <input type="reset" id="btdClear" value="자료 삭제" class="btn btn-danger">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
