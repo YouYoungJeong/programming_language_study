@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax4 : 직원 부서별 검색</title>
+    <style>
+        .error {color: red; margin-top: 10px;}
+        table{
+            border-collapse:collapse; /*테이블 테두리 합치기*/
+            margin-top: 15px;
+            width: 500px;
+        }
+        th, td{
+            border: 1px solid #333;
+            text-align: center;
+        }
+        th{
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body> 
+    <h3>직원 부서별 검색(Ajax)</h3>
+    <input type="text" id="deptKeyword" placeholder="부서명 입력">
+    <button id="btnSearch">검색</button>
+
+    <div id="loading">데이터 로딩중 출력창 - server측 사정</div>
+    <div id="message">error 출력</div>
+    <div id="result">출력</div>
+
+    <script>
+        /*body내에 있어서 window.onload없어도 가능*/
+        document.getElementById("btnSearch").addEventListener("click",loadJikwons);
+        
+        async function loadJikwons(){
+            const keyword = document.getElementById("deptKeyword").value.trim();
+            const loading = document.getElementById("loading");
+            const message = document.getElementById("message");
+            const resultDiv = document.getElementById("result");
+
+            loading.innerHTML = "데이터 로딩 중...";
+            message.innerHTML = "";
+            resultDiv.innerHTML = "";
+            
+            if(keyword === ""){
+                message.innerHTML = "<span class='error'>부서명을 입력하세요.</span>";
+                loading.innerHTML = "";
+                return;
+            }
+            
+            try{
+                const response = await fetch("js19jikwon.json");
+                // alert(response.ok) // 요청정보가 제대로 넘어왔으면 true
+                if(!response.ok){
+                    throw new Error("서버 오류 발생");
+                }
+                // response.ok가 true일때  받는 객체
+                const json = await response.json();
+                
+                // js19jikwon.json의 "statsu"가 "success"아니면
+                if(json .status !== "success"){
+                    throw new Error("서버 응답 오류 발생")
+                }
+                //js19jikwon.json의 "statsu"가 "success"가 맞으면 받는 객체
+                const jikwons = json.data;
+
+                // 부서 필터링
+                const filtered = jikwons.filter(jik =>
+                    jik.dept.includes(keyword)
+                );
+                if(filtered.length === 0){
+                    loading.innerHTML = "";
+                    message.innerHTML = "<b>검색 결과가 없습니다.</b>";
+                    return;
+                }
+                renderTableFunc(filtered);
+                
+                //검색 인원수와 연봉 평균(reduce() : 배열을 축소) 출력하기
+                // filtered배열에 있는 모든 직원의 연봉을 더해서 인원수로 나눔
+                const avgSalary = filtered.reduce((sum, emp) => sum + emp.salary, 0) / filtered.length;
+                message.innerHTML = `검색인원 : ${filtered.length} / 평균연봉 : ${avgSalary.toFixed(2)}`;
+                loading.innerHTML = "";
+            }
+            catch(error){
+                loading.innerHTML = "";
+                // error에 대해 css주기
+                message.innerHTML = "<span class='error'>"+ error.message +"</span>";
+            }
+
+        }
+        function renderTableFunc(data){
+            let table = "<table>";
+            table += "<tr><th>ID</th><th>이름</th><th>부서</th><th>연봉</th></tr>";
+            data.forEach(emp =>{
+                table += "<tr>"
+                table += "<td>" + emp.id + "</td>"
+                table += "<td>" + emp.name + "</td>"
+                table += "<td>" + emp.dept + "</td>"
+                table += "<td>" + emp.salary + "</td>"
+                table += "</tr>"
+            });
+            table += "</table>"
+
+            document.getElementById("result").innerHTML = table;
+        }
+    </script>
+</body>
+</html>

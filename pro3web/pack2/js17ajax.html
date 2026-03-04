@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Ajax2 : 전통적인 방식 2</title>
+    <script>
+        window.onload = () => {
+            document.querySelector("#btn1").onclick = funcJson;
+            document.querySelector("#btn2").onclick = funcCsv;
+        }
+
+        function funcJson(){
+            let xhr = new XMLHttpRequest();
+            
+            xhr.open("GET", "sangpum.json" , true);                 
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    //JSON 모양의 문자열을 JSON객체로 변환.
+                    // type : data - object(JSON객체) , xhr.responseText - string
+                    let data = JSON.parse(xhr.responseText);
+
+                    // 출력 형태 디자인
+                    let output = "JSON 반환 결과<br>";
+                    output += "코드&nbsp;&nbsp;&nbsp;품명<br>";
+                        for(let i =0; i < data.length; i++){
+                        output += data[i].code + "&nbsp;&nbsp;&nbsp;" + data[i].sang + "<br>"
+                        }
+                    // "<br>"태그가 있으니까 HTML, 이벤트에 의해 출력됨.
+                    document.querySelector("#result").innerHTML = output;
+                    }
+                else{
+                    document.querySelector("#result").innerHTML = "로딩 실패 : " + xhr.status;
+                    }
+                }
+            xhr.send();
+        }
+
+        function funcCsv(){
+            let xhr = new XMLHttpRequest();
+            
+            xhr.open("GET", "sangpum.csv" , true);                 
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    //trim 앞뒤의 공백자르기
+                    let text = xhr.responseText.trim()
+                    let lines = text.split("\n") // 엔터 단위 배열
+
+                    let output = "CSV 반환결과<br>"
+                    for(let i=0; i <lines.length; i++){
+                        if(lines[i]!==""){
+                            let parts = lines[i].split(",");
+                            let code = parts[0].trim();
+                            let sang = parts[1].trim();
+                            output += "코드는 " + code +" 상품명은 " + sang + "<br>";
+                        }
+                    }
+
+
+                    document.querySelector("#result").innerHTML = output;
+                }
+            }
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h3>전통 AJAX 처리</h3>
+    <button id="btn1">JSON 불러오기</button>
+    <button id="btn2">CSV 불러오기</button>
+    <hr>
+    <div id="result"> 출력공간 </div>
+</body>
+</html>

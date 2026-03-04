@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajax</title>
+    <title> Ajax1 : 전통적인 방식 1</title>
     <script>
         window.onload = () => {
             document.querySelector("#btnGet").onclick = getFunc;
@@ -11,16 +11,30 @@
         }
         /*Ajax 기본 명령어 : https://cafe.daum.net/flowlife/HqLj/38*/
         let xhr;
-        
+        /* 
+        개념 필수!
+        XMLHttpRequest 방식 
+        original 방식 open -> onreadystatechange -> send : 현장에서 안씀.(원리알기좋다-개념용.)
+        간결하게 사용하기위해 사용하는 방식 : Fetch API를 이용한 AJAX 요청 <- 실무용
+        또는 -> asyinc await fetch 사용
+        https://cafe.daum.net/flowlife/HqLj/37
+
+        현재 Live server는 html service만 가능한 상태라 js.py는 사용이 불가.
+        HTTPRequestHandler, flask는 가능.
+        flask를 사용하겠다.
+        */
         function getFunc(){
             let irum = frm.name.value;
             let nai = frm.age.value;
             // alert(irum + " " + nai);
-            // 전통적인 방식 open -> onreadystatechange -> send : 현장에서 안씀.(교육용 원리알기좋다.)
+            
             xhr = new XMLHttpRequest();                     // 서버와 Ajax 통신용 클래스
-            let fname = "js.py?irum="+irum+ "&nai=" + nai;  //query string
+            let fname = "js16.py?irum="+irum+ "&nai=" + nai;  //요청명?query string
+            // 임시방편용 js16.py 작성(얘는 처리후 json을 반환한다고 가정) - 아직은 .py을 활성화 못시킴.
             xhr.open("GET", fname, true);                   // true면 비동기방식, false면 동기방식 
             xhr.onreadystatechange = function(){
+
+                //if(4=통신상태가 이상이 없고, 200 = 내가 요청한 파일이 이상이 없다면)
                 if(xhr.readyState === 4 && xhr.status === 200){
                     process1();
                 }
@@ -29,11 +43,28 @@
         }
         
         function process1(){
-            alert(xhr.responseText);
+            alert(xhr.responseText);//responseText,responseXml 이 있는데 우리는 Xml 안씀.
+            // py을 받아서 출력 - Ajax 새로고침버튼이 깜박이지 않음.
         }
         
         function postFunc(){
-
+            let irum = frm.name.value;
+            let nai = frm.age.value;
+            
+            xhr = new XMLHttpRequest();                     
+            let fname = "js16.py";  
+            xhr.open("POST", fname, true);                 
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    process1();
+                }
+            }
+            /*POST 방식은 send에 query문 작성
+            body 영역에 포함되어 전송(대용량)
+            405 (Method Not Allowed) - 권한 문제*/ 
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencodede");
+            xhr.send("irum="+ irum + "&nai=" + nai);
+        
         }
     </script>
 </head>
