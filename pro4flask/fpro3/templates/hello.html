@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello</title>
+</head>
+<body>
+    <!--
+    jinja2 템플릿 변수를 사용
+    http://127.0.0.1:5000/hello <- 요청명만 써있어. 
+    py에서 rendering하고있음.
+    -->
+
+    안녕, {{name}} {{juso}} 날씨는 어때? {{name}}{{name}}
+
+    <!--지금까지는 html을 그대로 보냈는데 
+    클라이언트의 요청을 html에 py내용을 넣어서 
+    완벽해진 결과를 넣어서 그 결과를 보냈음 <= 이과정은 jinja2를 사용
+    그래서 클라이언트는 :
+    브라우저 =>  안녕, 길동아 강남구 테헤란로 날씨는 어때? 길동아길동아
+    이렇게 받음.
+    안녕, {{name}} {{juso}} 날씨는 어때? {{name}}{{name}}
+    이건 파이썬 인터프리터가 작업함.
+    -->
+</body>
+</html>
