@@ -1,0 +1,24 @@
+<!-- base.html의 모양을 적용! - 레이아웃을 적용 -->
+{% extends "base.html" %}
+
+
+{% block title %}조건문{% endblock %}
+    <!--각각의 html에 구조를 통일하고싶어-->
+
+{% block content %}
+    <h3> 조건 연습 </h3>
+    <!-- 
+    jinja if block - 브라우저가 해석 못함.
+    jinja 가 적용된 html안에 python이 들어옴.
+    python이 해석한 결과를 가지고 jinja가 html화 해서 클라이언트에게 로 넘겨줌
+    -->
+    {% if score >= 90 %}
+        <p>성적 : {{score}} -> a 등급</p>
+    {% elif score >= 80 %}
+        <p>성적 : {{score}} -> b 등급</p>
+    {% else %}
+        <p>성적 : {{score}} -> c 등급</p>
+    {% endif %}
+        <!--endif  if문을 닫아줘야함 -->
+{% endblock %}
+    
