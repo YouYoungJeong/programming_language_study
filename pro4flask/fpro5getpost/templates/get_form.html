@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>GET 방식 요청(요청명?변수=값&변수=값)</h3>
+    <!-- 두가지 똑같음 - 표현 방법만 다름 -->
+    방법1 - a tag<br>
+    <a href="/get_result?username=관우&age=25">get으로 자료 전달</a><br>
+    <!-- get_result?username=관우&age=25 : 요청명?변수=값&변수=값 
+    변수 - 아규먼트, 인수, 인자-->
+    <br>
+    방법2 - form <br>
+    <!-- method안적으면 get이 기본이야 -->
+    <form action="get_result" method="get">
+        이름 : <input type="text" name="username"><br>
+        나이 : <input type="number" name="age"><br>
+        <input type="submit" value="전송">
+        <!-- get_result?username=공기밥&age=23 : 요청명?변수=값&변수=값-->
+    </form>
+</body>
+</html>

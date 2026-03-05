@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // window.onload = function(){...};
+        document.addEventListener("DOMContentLoaded", () =>{
+        /* form event handler 등록 두가지 방식 */
+        // 1번
+            // document.getElementsByName("form");
+        // 2번
+        /*form[name='postForm'] - form tag속성중 name='postForm' */
+        const form =document.querySelector("form[name='postForm']");
+        /* button 이벤트 추가*/
+        
+        const btn = document.querySelector("#btnSend");
+        btn.addEventListener("click",()=>{
+            form.requestSubmit(); // 검증 후 자료 전송 실행
+        });
+        /* 이벤트 발생 흐름
+        -> DOM method(요소 선택) - document.querySelector()
+        -> event handler - addEventListener()
+            ->이벤트 발생 - click
+            -> 이벤트 핸들러 함수 실행
+        -> DOM method - requestSubmit()
+        */
+    
+
+        /*입력 자료 검사*/
+        form.addEventListener("submit", (event) =>{
+            const name = document.querySelector("#username").value.trim();
+            const email = document.querySelector("#email").value.trim();
+            
+            if(!name){
+                alert("이름 입력");
+                event.preventDefault();
+                return;
+            }
+            if(!email || !email.includes("@")){
+                alert("올바른 이메일 입력");
+                event.preventDefault();
+                return;
+            }
+            
+        });
+
+        });
+    </script>
+</head>
+<body>
+    <h3>POST 방식 요청(자료가 body영역에 담겨 서버로 전달)</h3>
+    <!-- 
+    대량의 데이터를 넘길 수 있다. - 게시판 글쓰기
+    보안유지에 좋다. - 로그인할때 필수
+    form tag밖에 없어.
+    -->
+    <form action="/post_result" method="post" name="postForm">
+        이름 : <input type="text" name="username" id="username"><br>
+        이메일 : <input type="text" name="email" id="email"><br>
+        <!-- 입력정보 오류 검사를 위해 - button사용 -->
+        <input type="button" value="전송" id="btnSend">
+    </form>
+</body>
+</html>

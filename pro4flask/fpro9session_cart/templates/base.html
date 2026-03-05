@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title if title else "장바구니 샘플"}}</title>
+</head>
+<body>
+    <!-- 메뉴처럼 쓰이는 div = nav -->
+    <nav>
+        <a href="/">상품목록</a> | <a href="/cart">장바구니</a>
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+    <hr>
+    <!-- 공통 바닥글(footer))-->
+    <footer class="bg-ligth text-center">
+        <span class="text-muted">작성자 : 홍길동 (주)에이콘 (전화)02-111-2222</span>
+    </footer>
+</body>
+</html>

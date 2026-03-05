@@ -7,5 +7,22 @@ def index():
     return render_template("index.html");
 
 
+@app.route("/condition")
+def condition():
+    score = 85;
+    # score 값은 서버가 넘겨줌.
+    return render_template("condition.html", score=score);
+
+@app.route("/loop")
+def loop():
+    users = ['손오공', '사오정', '저팔계'];
+    return render_template("loop.html", users=users);
+
+@app.route("/filter")
+def filter_ex():
+    message = "hello flask jinja2";
+    price = 12345;
+    return render_template("filter.html", message=message, price=price);
+
 if __name__==("__main__"):
     app.run(debug=True, host="0.0.0.0")
