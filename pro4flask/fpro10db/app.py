@@ -111,7 +111,7 @@ def add_save():
         with conn.cursor() as cur:
             # code를 입력하지 않기 때문에 프로그램으로 입력할 것 
             # - 가장 큰값을 찾아서 다음순서로 넣음
-            # DB가 바뀌어도 변경하지 auto
+            # DB가(orcle,...) 바뀌어도 변경하지 않아도 됨.
             cur.execute("select max(code) as max_code from sangdata") # mariadb에서 검증해보기
             row = cur.fetchone() # max값은 하나만 넘어와 단수
             
