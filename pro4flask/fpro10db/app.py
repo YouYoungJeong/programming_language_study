@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.secret_key = "abcdef123456" # session/flash를 위한 쿠키 서명용 secret_key
 
 """ MariaDB 연결 정보 
-        원래는 감춰야함
+        원래는 감춰야함 - 피클
         env파일로 읽어와도 됨. 
 """
 DB_HOST = os.getenv("DB_HOST", "127.0.0.1")

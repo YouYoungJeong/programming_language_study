@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loginForm</title>
+</head>
+<body>
+    <!-- 성공 해야하만 이페이지가 보임 -->
+    <h2>직원 로그인</h2>
+
+    <!-- flash 메세지 출력 관련 코드 : Err메세지 -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for m in messages %}
+                <li>{{m}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- login form 은 전부 post방식-->
+    <form action="{{url_for('login_post')}}" method="post">
+        <p>직원번호 : <input type="text" name="jikwonno"></p>
+        <p>직원이름 : <input type="text" name="jikwonname"></p>
+        <button type="submit">로그인</button>
+    </form>
+    
+</body>
+</html>
