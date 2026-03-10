@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>커스텀 핀 지도 테스트</title>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=8w59cqmsc5"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+            background: #f5f7fb;
+        }
+
+        .wrap {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 24px;
+        }
+
+        .sidebar h1 {
+            margin: 0 0 8px;
+            font-size: 24px;
+            color: #111827;
+        }
+
+        .sidebar p {
+            margin: 0 0 20px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .btn {
+            width: 100%;
+            height: 46px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #111827, #7c3aed);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .place-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .place-item {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 14px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .place-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .place-item h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+            color: #111827;
+        }
+
+        .place-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            padding: 20px 24px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .topbar h2 {
+            margin: 0 0 6px;
+            font-size: 22px;
+            color: #111827;
+        }
+
+        .topbar p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        #map {
+            width: 100%;
+            height: calc(100vh - 89px);
+        }
+
+        .info-box {
+            padding: 4px;
+            min-width: 180px;
+        }
+
+        .info-box h4 {
+            margin: 0 0 6px;
+            font-size: 15px;
+            color: #111827;
+        }
+
+        .info-box p {
+            margin: 0;
+            font-size: 13px;
+            color: #4b5563;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 900px) {
+            .wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            #map {
+                height: 70vh;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="sidebar">
+        <h1>지도 핀 데모</h1>
+        <p>
+            임의의 위도/경도 데이터로<br>
+            커스텀 핀을 찍는 테스트 페이지
+        </p>
+
+        <button class="btn" id="showAllBtn">전체 핀 보기</button>
+
+        <div class="place-list" id="placeList"></div>
+    </div>
+
+    <div class="content">
+        <div class="topbar">
+            <h2>네이버 지도 커스텀 핀</h2>
+            <p>나중에는 DB 좌표를 받아서 같은 방식으로 출력하면 됨</p>
+        </div>
+        <div id="map"></div>
+    </div>
+</div>
+
+<script>
+    // 임의의 위도/경도 데이터셋
+    var places = [
+        {
+            id: 1,
+            name: "강남 한식당",
+            category: "한식",
+            lat: 37.498095,
+            lng: 127.027610,
+            description: "임의 데이터입니다. 한식 맛집 컨셉 매장입니다."
+        },
+        {
+            id: 2,
+            name: "역삼 스시바",
+            category: "일식",
+            lat: 37.500622,
+            lng: 127.036456,
+            description: "임의 데이터입니다. 스시 오마카세 컨셉 매장입니다."
+        },
+        {
+            id: 3,
+            name: "선릉 브런치 카페",
+            category: "카페",
+            lat: 37.504503,
+            lng: 127.048944,
+            description: "임의 데이터입니다. 감성 브런치 카페 컨셉입니다."
+        },
+        {
+            id: 4,
+            name: "논현 고깃집",
+            category: "고기",
+            lat: 37.511120,
+            lng: 127.021420,
+            description: "임의 데이터입니다. 회식용 고깃집 컨셉 매장입니다."
+        },
+        {
+            id: 5,
+            name: "압구정 디저트샵",
+            category: "디저트",
+            lat: 37.527360,
+            lng: 127.028430,
+            description: "임의 데이터입니다. 디저트 전문점 컨셉입니다."
+        },
+        {
+            id: 6,
+            name: "삼성 이탈리안 레스토랑",
+            category: "양식",
+            lat: 37.508856,
+            lng: 127.063150,
+            description: "임의 데이터입니다. 파스타/스테이크 컨셉 매장입니다."
+        }
+    ];
+
+    // 네가 준 레퍼런스 형식 유지
+    var mapOptions = {
+        center: new naver.maps.LatLng(37.5055, 127.0350),
+        zoom: 13
+    };
+
+    var map = new naver.maps.Map('map', mapOptions);
+
+    var markers = [];
+    var infoWindows = [];
+
+    function closeAllInfoWindows() {
+        for (var i = 0; i < infoWindows.length; i++) {
+            infoWindows[i].close();
+        }
+    }
+
+    function moveToPlace(placeId) {
+        for (var i = 0; i < markers.length; i++) {
+            if (markers[i].id === placeId) {
+                closeAllInfoWindows();
+                map.panTo(markers[i].position);
+                map.setZoom(15);
+                break;
+            }
+        }
+    }
+
+    function renderPlaceList() {
+        var placeList = document.getElementById("placeList");
+
+        for (var i = 0; i < places.length; i++) {
+            (function(place, index) {
+                var item = document.createElement("div");
+                item.className = "place-item";
+                item.innerHTML =
+                    "<h3>" + (index + 1) + ". " + place.name + "</h3>" +
+                    "<p>" + place.category + "</p>" +
+                    "<p>" + place.description + "</p>";
+
+                item.addEventListener("click", function() {
+                    moveToPlace(place.id);
+                });
+
+                placeList.appendChild(item);
+            })(places[i], i);
+        }
+    }
+
+    function createMarkers() {
+        for (var i = 0; i < places.length; i++) {
+            (function(place) {
+                var position = new naver.maps.LatLng(place.lat, place.lng);
+
+                var marker = new naver.maps.Marker({
+                    map: map,
+                    position: position,
+                    title: place.name,
+
+                    // 커스텀 핀 이미지
+                    // 나중에 진짜 이미지 파일이 있으면 url: "./my-pin.png" 로 바꾸면 됨
+                    icon: {
+                        content:
+                            '<div style="width:44px;height:56px;position:relative;">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="44" height="56" viewBox="0 0 44 56">' +
+                                    '<defs>' +
+                                        '<linearGradient id="pinGradient" x1="0%" y1="0%" x2="100%" y2="100%">' +
+                                            '<stop offset="0%" stop-color="#111827"/>' +
+                                            '<stop offset="100%" stop-color="#7c3aed"/>' +
+                                        '</linearGradient>' +
+                                    '</defs>' +
+                                    '<path d="M22 2C11.5 2 3 10.5 3 21c0 15.5 19 33 19 33s19-17.5 19-33C41 10.5 32.5 2 22 2z" fill="url(#pinGradient)"/>' +
+                                    '<circle cx="22" cy="21" r="9" fill="white"/>' +
+                                    '<text x="22" y="25" text-anchor="middle" font-size="10" font-family="Arial" font-weight="700" fill="#7c3aed">BWL</text>' +
+                                '</svg>' +
+                            '</div>',
+                        size: new naver.maps.Size(44, 56),
+                        anchor: new naver.maps.Point(22, 56)
+                    }
+                });
+
+                var infoWindow = new naver.maps.InfoWindow({
+                    content:
+                        '<div class="info-box">' +
+                            '<h4>' + place.name + '</h4>' +
+                            '<p>카테고리: ' + place.category + '</p>' +
+                            '<p>' + place.description + '</p>' +
+                            '<p>위도: ' + place.lat.toFixed(6) + ', 경도: ' + place.lng.toFixed(6) + '</p>' +
+                        '</div>',
+                    borderWidth: 0,
+                    backgroundColor: "#fff",
+                    pixelOffset: new naver.maps.Point(0, -10)
+                });
+
+                naver.maps.Event.addListener(marker, "click", function() {
+                    closeAllInfoWindows();
+                    infoWindow.open(map, marker);
+                    map.panTo(position);
+                });
+
+                markers.push({
+                    id: place.id,
+                    marker: marker,
+                    position: position
+                });
+
+                infoWindows.push(infoWindow);
+            })(places[i]);
+        }
+    }
+
+    function bindShowAllButton() {
+        var showAllBtn = document.getElementById("showAllBtn");
+
+        showAllBtn.addEventListener("click", function() {
+            var bounds = new naver.maps.LatLngBounds();
+
+            for (var i = 0; i < markers.length; i++) {
+                bounds.extend(markers[i].position);
+            }
+
+            map.fitBounds(bounds);
+            closeAllInfoWindows();
+        });
+    }
+
+    renderPlaceList();
+    createMarkers();
+    bindShowAllButton();
+</script>
+</body>
+</html>
+접기
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+레퍼런스에 메시지 보내기
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch</title>
+</head>
+<body>
+    <button id="loadBtn">상품자료 읽기(fetch)</button>
+    <table id="resultTable" border="1">
+    </table>
+
+    <script> //then, catch 앞에 세미콜론(;)쓰면 체인 끊김!
+        document.getElementById("loadBtn").addEventListener("click", function () {
+            fetch("/api/sangdata")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("서버 오류");
+                    }
+                    return response.json();
+                    
+                })// return 값을 data가 받음
+                .then(data => {
+                    const table = document.getElementById("resultTable");
+                    table.innerHTML = ""; // table 초기화하고 값 받기
+
+                    if (data.length === 0) {
+                        table.innerHTML = "<tr><td>자료 없음</td></tr>";
+                        return;
+                    }
+
+                    let headerRow = "<tr>";
+                    Object.keys(data[0]).forEach(key => {
+                        headerRow += `<th>${key}</th>`;
+                    });
+                    headerRow += "</tr>";
+                    table.innerHTML += headerRow;
+
+                    // 자료 채우기
+                    data.forEach(row => {
+                        let rowHtml = "<tr>";
+                        Object.values(row).forEach(value => {
+                            rowHtml += `<td>${value}</td>`;
+                        });
+                        rowHtml += "</tr>";
+                        table.innerHTML += rowHtml;
+                    });
+                })
+                .catch(error => {
+                    alert("error : " + error.message);
+                });
+        });
+    </script>
+</body>
+</html>

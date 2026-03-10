@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <!-- 예전 방식 <link rel="stylesheet" href="static/css/style.css')}}"> -->
+    <!-- 요즘 추세 방식 CSS 정적파일 URL 생성 : CSS먼저 주기!(W3C)-->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- JS 정적파일 URL 생성 , defer : -->
+    <script src="{{url_for('static', filename='js/app.js')}}" defer></script>
+</head>
+<body>
+    <h2>FLASK API + Ajax(fetch) GET 방식</h2>
+    <div>
+        <div>
+            <label for="name">이름</label>
+            <input id="name" type="text" value="길동" />
+        </div>
+        <div>
+            <label for="age">나이</label>
+            <input id="age" type="number" value="23" min="1" />
+        </div>
+        <!-- button처럼 생긴 그림이다 js 사용하겠다 -->
+        <button id="sendBtn">GET(REST) 요청</button>
+    </div>
+    <div id="result"></div>
+</body>
+</html>
