@@ -61,7 +61,8 @@ try {
  // fetch()는 HTTP 요청을 보내는 브라우저 내장 함수
  // window.API_LIST는 index.html에서 주입한 API 주소:<script>window.API_LIST = ...</script>
    // 아래 코드를 통해 브라우저가 GET /api/sangdata 요청을 보냄
-    const res = await fetch(window.API_LIST, { headers: { "Accept": "application/json" } });
+    const res = await fetch(window.API_LIST, 
+        { headers: { "Accept": "application/json" } });
 
     // 서버 응답(res)의 본문(body)을 “JSON으로 읽어서” 자바스크립트 객체로 변환.
     const data = await res.json();
@@ -171,16 +172,3 @@ els.btnDelete.addEventListener("click", deleteOne);
 
 // 최초 로딩 시 전체조회
 window.addEventListener("DOMContentLoaded", loadAll);
-
-
-
-
-
-
-
-
-
-
-
-
-
