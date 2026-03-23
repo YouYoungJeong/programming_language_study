@@ -1,5 +1,5 @@
 import xml.etree.cElementTree as etrr
-# 가져오는 데이터가 XML인경우 etrr
+# 가져오는 데이터가 XML인경우 etrr - 돔을 이용해서 가져옴.
 # 그외 뷰티풀숩
 xmlfile = etrr.parse("my.xml")
 print(xmlfile, type(xmlfile)) # <class 'xml.etree.ElementTree.ElementTree'>
