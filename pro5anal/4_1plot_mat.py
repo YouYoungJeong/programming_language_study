@@ -9,8 +9,8 @@ matplotlib + seaborn을 같이 사용해야 시각화가 좋아짐
 chart 용어 정리 (정리)
     Figure : 모든 차트가 그려지는 전체 영역 
         2차원일때 하나의 Figure에 Axis 두개를 가지고 있다
+    Axes(plot) : Figure안에 차트가 그려질 수 있는 영역 
     Axis x/y : x축 y축
-    Axes(plot) : 축안에 차트가 그려질 수 있는 영역 
     tick : 축 위에 눈금
     lable : 축,차트 의 이름 
 """
@@ -79,3 +79,32 @@ plt.subplot(2, 1, 2) # (2행, 1열, 2행)
 plt.plot(x, y_cos)
 plt.title('cosine')
 plt.show()
+print()
+
+# 꺽은선 그래프
+irum = ['a', 'b', 'c', 'd', 'e']
+kor = [80, 50, 70, 70, 90]
+eng = [60, 70, 80, 90, 100]
+plt.plot(irum, kor, 'ro-') # 기준값은 x축 , 기준값의 변하는 값은 y축
+plt.plot(irum, eng, 'bo--')
+plt.ylim([50, 100])
+plt.title('시험 점수')
+plt.legend(['국어', '영어'], loc=4 ) #loc='best' 는 적당한 자리를 알아서 잡음.
+''' 2   1 <-- legend위치   
+    3   4'''
+plt.grid(True)
+fig = plt.gcf() # 이미지로 저장준비 하겠다.
+plt.show()
+fig.savefig('plot1.png') # 파일로 저장.
+
+
+# 이미지 읽기
+from matplotlib.pyplot import imread
+img = imread("plot1.png")
+plt.imshow(img)
+plt.show()
+"""
+이미지 falsk에서 추출할때 이미지를 읽어오는 방법
+    (정적) 서버에서 저장(static)해서 img src로 읽는방법
+    (동적)모듈 사용 chart.js나, JS 라이브러리 사용
+"""
