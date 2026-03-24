@@ -71,7 +71,9 @@ for i in range(1,3):
 
     # data값 추출
     data = soup.find_all(attrs={'class':'number'})
+    print(data)
     data2 = [tag.text.strip().replace("\n\t\t\t\t",' ') for tag in data]
+    # print(data2)
     data3 = []
     for a in range(0, 500, 10):
             data3 += [(data2[0+a:10+a])]
