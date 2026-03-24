@@ -114,27 +114,33 @@ try:
 - 성별 연봉 분포 + 이상치 확인    <== 그래프 출력
 - Histogram (분포 비교) : 남/여 연봉 분포 비교    <== 그래프 출력
     '''
-    # print('-'*15,'c_키보드로 사번, 직원명을 입력받아 로그인에 성공하면 console에 아래와 같이 출력','-'*15)
-    # no = input('사번')
-    # name = input('직원명')
-    # sql3 = f'''select jikwonno, jikwonname, busername, jikwonjik, busertel, jikwongen 
-    # from jikwon inner join buser on jikwon.busernum=buser.buserno 
-    # where jikwon.jikwonno={no} and jikwon.jikwonname='{name}' 
-    # '''
-    # inputdf = pd.read_sql(sql3, conn)
-    # print('인원수 : ',len(inputdf))
+    print('-'*15,'c_키보드로 사번, 직원명을 입력받아 로그인에 성공하면 console에 아래와 같이 출력','-'*15)
+    no = input('사번')
+    name = input('직원명')
+    sql3 = f'''select jikwonno, jikwonname, busername, jikwonjik, busertel, jikwongen 
+    from jikwon inner join buser on jikwon.busernum=buser.buserno 
+    where jikwon.jikwonno={no} and jikwon.jikwonname='{name}' 
+    '''
+    inputdf = pd.read_sql(sql3, conn)
+    print('인원수 : ',len(inputdf))
     
     print('-'*15,'c_성별 연봉 분포 + 이상치 확인','-'*15)
     gen1 = jikdf[jikdf['성별']=='여']
     gen2 = jikdf[jikdf['성별']=='남']
-    figure, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=2)
+    figure, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
     sns.boxplot(data=jikdf, x='성별', y='연봉', ax=ax1) #연도별 대여 횟수
     sns.barplot(data=jikdf, x='성별', y='연봉', ax=ax2)
     # plt.scatter(jikdf['성별'], jikdf['연봉'])
     plt.show()
 
+    print(gen1, gen2)
     print('-'*15,'c_Histogram (분포 비교) : 남/여 연봉 분포 비교','-'*15)
-
+    fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
+    ax1.hist(gen1['연봉'], bins=15)
+    ax2.hist(gen2['연봉'], bins=15)
+    ax1.set(ylabel=' 인원수', title='여성 연봉 분포(histogram)')
+    ax2.set(ylabel=' 인원수', title='남성 연봉 분포(histogram)')
+    plt.show()
 
 
 except Exception as err:
