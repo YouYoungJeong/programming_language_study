@@ -1,12 +1,5 @@
 """
 pandas 문제 7)
-c) 키보드로 사번, 직원명을 입력받아 로그인에 성공하면 console에 아래와 같이 출력하시오.
-    조건 :  try ~ except MySQLdb.OperationalError as e:      사용
-    사번  직원명  부서명   직급  부서전화  성별
-    ...
-    인원수 : * 명
-- 성별 연봉 분포 + 이상치 확인    <== 그래프 출력
-- Histogram (분포 비교) : 남/여 연봉 분포 비교    <== 그래프 출력
 """
 import pymysql
 import numpy as np
@@ -14,6 +7,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import koreanize_matplotlib
 import seaborn as sns
+'''
+26.03현재 pandas read_sql 사용시 권장하는 방법
+pip install sqlalchemy
+from sqlalchemy import create_engine
+engine = create_engine("mysql+pymysql://root:123@127.0.0.1:3306/test")
+'''
+from sqlalchemy import create_engine
+engine = create_engine("mysql+pymysql://root:123@127.0.0.1:3306/test")
 
 config = {
     'host':'127.0.0.1',
@@ -43,13 +44,11 @@ try:
     
     # DataFrame의 자료를 파일로 저장
     print('-'*15,'DataFrame의 자료를 파일로 저장','-'*15)
-    jikdf.to_csv('5_2pandasdb_test.csv', index=None, header=None)
+    jikdf.to_csv('pandasdb_test.csv', index=None, header=None)
 
     print('-'*15,'부서명별 연봉의 합, 연봉의 최대/최소값을 출력','-'*15)
     # 부서명별 연봉의 합, 연봉의 최대/최소값을 출력
-    jikdf2 = pd.read_csv('5_2pandasdb_test.csv',header=None, names=['사번' ,'이름', '부서명', '연봉', '직급','성별'])
-    # print(jikdf2.head())
-    # print(jikdf2.info())
+    jikdf2 = pd.read_csv('pandasdb_test.csv',header=None, names=['사번' ,'이름', '부서명', '연봉', '직급','성별'])
     jik_pvt=pd.pivot_table(jikdf2, index='부서명',values='연봉',
                         aggfunc=['sum','max','min'])
     print(jik_pvt)
@@ -64,7 +63,7 @@ try:
     # 직원별 담당 고객자료(고객번호, 고객명, 고객전화)를 출력. 
     # 담당 고객이 없으면 "담당 고객  X"으로 표시
     sql2 = "select jikwonname, gogekno, gogekname, gogektel from gogek right outer join jikwon on gogek.gogekdamsano=jikwon.jikwonno"
-    jik_go = (pd.read_sql(sql2, conn))
+    jik_go = (pd.read_sql(sql2, engine))
     jik_go.gogekno = jik_go.gogekno.fillna('X')
     print(jik_go)
     
@@ -105,15 +104,7 @@ try:
     print(jikcis2)
     print()
 
-    '''
-    c) 키보드로 사번, 직원명을 입력받아 로그인에 성공하면 console에 아래와 같이 출력하시오.
-    조건 :  try ~ except MySQLdb.OperationalError as e:      사용
-    사번  직원명  부서명   직급  부서전화  성별
-    ...
-    인원수 : * 명
-- 성별 연봉 분포 + 이상치 확인    <== 그래프 출력
-- Histogram (분포 비교) : 남/여 연봉 분포 비교    <== 그래프 출력
-    '''
+    '''====================== c ===================='''
     print('-'*15,'c_키보드로 사번, 직원명을 입력받아 로그인에 성공하면 console에 아래와 같이 출력','-'*15)
     no = input('사번')
     name = input('직원명')
@@ -121,8 +112,8 @@ try:
     from jikwon inner join buser on jikwon.busernum=buser.buserno 
     where jikwon.jikwonno={no} and jikwon.jikwonname='{name}' 
     '''
-    inputdf = pd.read_sql(sql3, conn)
-    print('인원수 : ',len(inputdf))
+    inputdf = pd.read_sql(sql3, engine)
+    print(inputdf,'\n인원수 : ',len(inputdf))
     
     print('-'*15,'c_성별 연봉 분포 + 이상치 확인','-'*15)
     gen1 = jikdf[jikdf['성별']=='여']
@@ -133,7 +124,7 @@ try:
     # plt.scatter(jikdf['성별'], jikdf['연봉'])
     plt.show()
 
-    print(gen1, gen2)
+    # print(gen1, gen2)
     print('-'*15,'c_Histogram (분포 비교) : 남/여 연봉 분포 비교','-'*15)
     fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
     ax1.hist(gen1['연봉'], bins=15)

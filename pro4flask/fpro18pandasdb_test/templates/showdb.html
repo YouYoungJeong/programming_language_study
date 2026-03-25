@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>showdb</title>
+</head>
+<body>
+    <h2>직원 자료</h2>
+        <a href="/">메인 페이지</a>
+    <hr>
+    <h3> 직원 데이터 </h3>
+    {{jikwondata | safe}}
+    <h3>부서명자료를 이용하여  연봉합, 연봉평균</h3>
+    {{buser_des_html | safe}}
+    <h3>직급 자료를 이용하여  연봉합, 연봉평균</h3>
+    {{jik_des | safe}}
+    <h3>부서명별 연봉합, 평균을 이용하여 세로막대 그래프를 출력</h3>
+    <img src="../static/img/plot2.png">
+    <h3>성별, 직급별 빈도표</h3>
+    {{count_html | safe}} 
+    <h3>부서별 최고 연봉자</h3>
+    {{df3max_html | safe}}
+    <h3>부서별 직원 비율 계산</h3>
+    {{jik_count_html | safe}}
+</body>
+</html>

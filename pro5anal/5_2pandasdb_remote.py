@@ -39,11 +39,11 @@ try:
 
     # csv파일로 저장,출력하기 - csv file i/o
     cursor.execute(sql)
-    with open('5_2pandasdb2.csv', mode='w', encoding='utf-8') as fobj:
+    with open('pandasdb2.csv', mode='w', encoding='utf-8') as fobj:
         writer = csv.writer(fobj)
         for row in cursor.fetchall():
             writer.writerow(row)
-    df2 = pd.read_csv('5_2pandasdb2.csv', header=None, 
+    df2 = pd.read_csv('pandasdb2.csv', header=None, 
                     names=['번호','이름','부서','직급','성별','연봉'])
     print(df2.head(3))
     print()
