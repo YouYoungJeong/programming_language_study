@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>직원 자료, 직급별 연봉 통계</h2>
+    <form method="get" action="/dbshow">
+        <label for="dept">부서명 : </label>
+        <input type="text" id="dept" name="dept" placeholder="예)총무부">
+        <button type="submit">조회</button>
+        <a href="/">메인 페이지</a>
+    </form>
+    <hr>
+    <!-- jinja2사용! -->
+    <h3>직원 목록</h3>
+        {{jikwondata | safe}} <!--xss 공격이 올 수 있어서 이스케이프로 처리해서보낸걸.
+                                |(옵션)safe를 써주면 프로그램이 이스케이프 문자들을 처리를 해줌
+                                templates파일을 쓰는 모든것들이 사용함.-->
+    <h3>직급별 연봉 통계(평균 / 표준편차 / 인원수)</h3>
+        {{statsdata | safe}}
+</body>
+</html>
