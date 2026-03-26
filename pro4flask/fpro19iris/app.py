@@ -15,7 +15,7 @@ matplotlib.use('Agg')
     이미지 저장시 오류 방지 - 차트 출력 없이 저장할 때 사용
 """
 app = Flask(__name__)
-# =============== 상수 지정하기 ===================
+# =============== 경로 상수 지정하기 ===================
 # 현재 파일이 있는 경로 지정하기.
 BASE_DIR = Path(__file__) .resolve().parent
 # static/image경로 지정
@@ -41,7 +41,15 @@ def showdata():
     img_path = STATIC_DIR / 'fpro19.png'
     plt.savefig(img_path, dpi=130) # dpi 이미지 해상도
     plt.close()
-    return render_template('show.html')
+
+    irishtml = df.to_html(
+        classes='table table-striped table-sm' ,# 스타일(css)
+        index=False
+    )
+    return render_template('show.html',
+                            table=irishtml,
+                            img_path='images/fpro19.png' # 이미지의 경로를 넘길 수 있다.
+                            )
 
 
 if __name__ == '__main__':

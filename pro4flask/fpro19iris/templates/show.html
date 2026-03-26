@@ -7,5 +7,9 @@
 </head>
 <body>
     <h2>붓꽃 정보</h2>
+    <div>{{table | safe}}</div>
+    <h3> 꽃의 종별 건수 pie chart </h3>
+    <img src="{{url_for('static', filename=img_path)}}" 
+            alt="iris pie chart" style="width: 70%;"> 
 </body>
 </html>
