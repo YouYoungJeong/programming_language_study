@@ -44,3 +44,39 @@ def merge_sort(a):
 
 d = [6, 8, 3, 1, 2, 4, 7, 5]
 print(merge_sort(d))
+
+# =======================================================================
+print('[2) 알고리즘을 위한 코드]')
+# 재귀호출이 정렬된 리스트를 반환.
+# 병합도 새 리스트를 만들어 반환.
+# 원본 리스트는 그대로이고 정렬된 결과는 새 리스트에 저장.
+# 재귀를 사용할 때 데이터의 양이 많아지면 많아질 수록 메모리가 많이 필요함.
+def merge_sort2(a):
+    if len(a) <= 1:
+        return a
+    mid = len(a) // 2
+    # 길이가 1이 될때 까지 재귀 호출해 계속 반으로  나누기.
+    left = merge_sort2(a[:mid])
+    right = merge_sort2(a[mid:])
+
+    resrult = []
+    i = j = 0
+
+    # 병합(merge)
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            resrult.append(left[i])
+            i += 1
+        else:
+            resrult.append(right[j])
+            j += 1
+    
+    # 남은 요소 추가
+    resrult += left[i:]
+    resrult += right[j:]
+    return resrult
+
+
+d = [6, 8, 3, 1, 2, 4, 7, 5]
+sorted_d = merge_sort2(d)
+print(sorted_d)
