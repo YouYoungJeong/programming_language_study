@@ -16,7 +16,7 @@ print('-'*20,'동질성 검정실습1)','-'*20)
 # 교육방법에 따른 만족도에 대한 설문조사 수집 결과 자료
 data = pd.read_csv("https://raw.githubusercontent.com/pykwon/python/refs/heads/master/testdata_utf8/survey_method.csv")
 print(data.head(2), 
-    data['method'].unique(), data['survey'].unique()) # [1 2 3] [1 2 3 4 5]
+        data['method'].unique(), data['survey'].unique()) # [1 2 3] [1 2 3 4 5]
 
 ctab = pd.crosstab(index=data['method'], columns=data['survey'])
 ctab.index = ['방법1','방법2','방법3']
