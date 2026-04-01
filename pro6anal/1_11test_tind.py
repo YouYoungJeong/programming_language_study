@@ -90,7 +90,8 @@ print("칼럼추가")
 # 방법2
 # print(True * 1, " ", False * 1) # 이러면 숫자화 되서 .astype(int) 안해도 된다.
 data['rain_yn'] = (data.loc[:,('sumRn')] > 0) * 1
-print(data.head()) 
+print(data.head())
+print()
 '''
         YMD     AMT  maxTa  sumRn  rain_yn
 0  20190514       0   26.9    0.0        0
@@ -106,7 +107,7 @@ sp = np.array(data.iloc[:, [1, 4]]) # AMT, rain_yn만 추출 (2차원배열)
 # print(sp)
 '''
 [[      0       0] # 0번째열:AMT, 1번째열:rain_yn
- [  18000       1]
+[  18000       1]
 '''
 # 비의 유무에 따른 매출액 추출하기
 tg1 = sp[sp[:, 1] == 0, 0] # 집단 1 : 비 안올때 매출액
@@ -122,7 +123,28 @@ plt.show()
 print("날씨별 평균 매출액 확인하기")
 print("tg1(맑은날) 매출액 평균 :",np.mean(tg1)) # 761040.25
 print("tg2(비온날) 매출액 평균 :",np.mean(tg2)) # 757331.52
-
+print()
 
 # =============== 독립표본 t검정 시작 =======================
 print('-'*20,' 정규성 검정 ','-'*20)
+# 정규성 검정
+print(len(tg1), " ", len(tg2),"\n") # 236   92 - 비오는 날의 데이터가 양이 적다.
+print(stats.shapiro(tg1).pvalue) # 0.05605
+print(stats.shapiro(tg2).pvalue) # 0.88275
+print("두 그룹다 유의수준(0.05)보다 크므로 정규성을 만족한다\n")
+
+print('-'*20,' 등분산성 검정 ','-'*20)
+# 등분산성 검정
+print(stats.levene(tg1, tg2).pvalue,"\n") # 0.7123452333011173
+print("유의수준(0.05)보다 크므로 등분산성을 만족하므로 t검정 사용 가능\n")
+
+print('-'*20,'independent two samples t-test','-'*20)
+# t-test
+print(stats.ttest_ind(tg1, tg2, equal_var=True))
+# statistic=0.101098, pvalue=0.919534, df=326
+print('''  
+        해석 : 정규성, 등분산성 존건은 충족함
+        p-value:0.919534 > 유의수준:0.05 이므로 귀무가설 채택함
+        최종적으로 매출 데이터는 강수 여부에 따라 매출액 평균에 차이가 없다라는 의견 유지
+    ''') 
+# 후속조치가 필요하다.
