@@ -29,7 +29,7 @@ print(exp) # 기대빈도 : 50.8
 stat, p=  stats.chisquare(f_obs=data['관측도수'], f_exp=exp)
 print(f"stat: {stat} \np={p}")
 # print(f"\ndof={dof} \nexpected={expected}") # 이원카이제곱이 아니라 반환하지 않는 값.
-
+ 
 print("""
     판정 : 유의수준 0.05 > p-value 0.0003이므로 귀무 기각
     대립가설인 스포츠 음료의 선호도에 차이가 있다. 라는 의견이 받아들여짐.

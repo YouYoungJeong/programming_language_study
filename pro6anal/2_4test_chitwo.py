@@ -14,7 +14,7 @@
 
 귀무가설 : 교육수준과 흡연율 간의 관계가 없다.(독립 이다, 연관성이 없다.)
 대립가설 : 교육수준과 흡연율 간의 관계가 있다.(독립이 아니다, 연관성이 있다.)
-"""
+""" 
 import pandas as pd
 import scipy.stats as stats
 import matplotlib.pyplot as plt

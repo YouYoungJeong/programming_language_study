@@ -26,7 +26,7 @@ print(data.shape)
 print("행 : ",data.shape[0]) # 행
 print("열 : ",data.shape[1]) # 열
 print()
-# 가설설정
+# 가설설정 
 print("귀무가설(H₀) : 벼락치기 공부 하는것과 합격 여부는 관계가 없다.")
 print("대립가설(H₁) : 벼락치기 공부 하는것과 합격 여부는 관계가 잇다.")
 
