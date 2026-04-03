@@ -1,4 +1,5 @@
 '''
+최소 자승법 (최소제곱법, Least Square Method)
 최소제곱해 선형 행렬 방정식으로 얻기
 '''
 import numpy as np
@@ -34,6 +35,7 @@ print(0.96*3 + (-0.9899999999999998)) # 실제값 2.1, 예측값 1.89
 plt.scatter(x, y, marker="o", label="실제값")
 plt.plot(x, (weight*x + bias),'r', label='최적화된 선형직선(추세선)')
 plt.grid(True)
+plt.legend()
 plt.show()
 
 # 경험하지 않은 x값에 대한 y값은? 을 구할 수가 있다.(추세선이 완성이 되었기 때문)
