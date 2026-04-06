@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    function sendData() {
+        let year = document.querySelector('.date').value;
+
+        fetch(`/predict?data=${encodeURIComponent(year)}`) // encoding해서 보내기
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('서버 오류');
+                }
+                return res.json();
+            })
+            .then(analdata => {
+                document.getElementById('pay_pred').innerHTML = analdata.pay_pred;
+                document.getElementById('r_scoremsg').innerHTML = analdata.r_scoremsg;
+                document.getElementById('sik').innerHTML = analdata.sik;
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error.');
+            });
+    }
+</script>
+</head>
+<body>
+    <h2>근무년수 → 예상연봉(LinearRegression)</h2>
+    <div>
+        근무년수 <input type="text" class="date">
+        <button type="button" onclick="sendData()">확인</button>
+    </div>
+    <br>
+
+    <div id="result">
+        예상연봉액 : <span id="pay_pred"></span><br>
+        설명력(R²) : <span id="r_scoremsg"></span><br>
+        회귀식 : <span id="sik"></span><br>
+    </div>
+
+    <div>
+        <h3>직급별 연봉평균</h3>
+        {% if result %}
+            {{ result | safe }}
+        {% endif %}
+    </div>
+</body>
+</html>
