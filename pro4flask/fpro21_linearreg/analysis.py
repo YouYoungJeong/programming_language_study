@@ -39,6 +39,10 @@ def linearFunc(year):
     years =[[year]]     # 2차원
     pay_pred = int(model.predict(years)[0]) # 연봉 예측값 출력 소수점자르기
     
+    # 예상연봉액이 음수인 경우 0 을 반환
+    if pay_pred < 0:
+        pay_pred = 0
+
     # R² , 회귀식,  연봉 예측값 반환
     return(r_scoremsg, sik, pay_pred) 
 
