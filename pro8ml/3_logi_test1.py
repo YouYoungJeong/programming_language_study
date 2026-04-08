@@ -14,6 +14,7 @@ from sklearn.metrics import accuracy_score
 df = pd.read_csv("logitest1.csv")
 print(df.info())
 print(df.요일.unique())
+
 # 주말 데이터 추출
 df_weekend = df[df['요일'].isin(['토', '일'])]
 df_weekend.reset_index(inplace=True, drop=True)
