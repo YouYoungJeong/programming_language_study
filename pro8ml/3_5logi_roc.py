@@ -78,5 +78,5 @@ plt.title('ROC Curve')
 plt.legend()
 plt.show()
 
-print('AUC(Area Under the Curve : ROC Curve의 면적 - 1에 근사할 수록 좋다. )출력')
+print('AUC(Area Under the Curve : ROC Curve의 면적 : 1에 근사할 수록 좋다. )출력')
 print('AUC :',metrics.auc(fpr, tpr)) #  0.92797 - 매우 성능이 우수한 모델임을 알 수 있다.

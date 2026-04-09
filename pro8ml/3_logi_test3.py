@@ -89,3 +89,82 @@ print(' Roc curve--------------------------------------------')
 f_value = model.decision_function(x_test) # 평가는 학습에 쓰지 않은 x_test로 해야함
 print('f_value : ',f_value[:10])
 print()
+
+# 모델의 성능 파악
+from sklearn.metrics import confusion_matrix
+print(confusion_matrix(y_test, y_pred))
+#     P         N
+# T [[141(TP)    1(FN)]
+# F [ 6 (FP)    152(TN)]]
+acc = (141 + 152) / 300       # (TP + TN) / 전체수
+recall = 141 / (141 + 1)      # TP / (TP + FN)
+precission = 141 / (141 + 6)  # TP / (TP + FP)
+specificity = 152 / (6 + 152) # TN / (FP + TN) - 특이도
+fallout = 6 / (6 + 152)      # FP / (FP + TN) - 위양성율(fpr)
+print('acc : ', acc)   
+print('recall(TPR - roc curve y축, 1에 근사하면 좋다.) : ', recall)   
+print('precission : ', precission)   
+print('specificity : ', specificity)   
+print('fallout(FPRate - roc curve x축, 0에 근사하면 좋다.)', fallout)   
+print('fallout(== 1-specificity)', 1-specificity)   
+print()
+
+acc_score = metrics.accuracy_score(y_test, y_pred)
+precision = metrics.precision_score(y_test, y_pred)
+recall = metrics.recall_score(y_test, y_pred)
+print("모델 정확도 :",acc_score)
+print("모델 정밀도 :",precision)
+print("모델 재현율 :",recall)
+print()
+
+cl_rep = metrics.classification_report(y_test, y_pred)
+print('분류모델 리포트 :\n',cl_rep)
+print()
+
+# ROC Curve
+fpr, tpr, thresholds = metrics.roc_curve(y_test, model.decision_function(x_test))
+print('fpr :',fpr)
+print('tpr :',tpr)
+print('AUC(Area Under the Curve : ROC Curve의 면적 : 1에 근사할 수록 좋다. )출력')
+print('AUC :',metrics.auc(fpr, tpr))
+
+# ROC Curve
+plt.plot(fpr, tpr, 'o-', label='LogisticRegression')
+plt.plot([0,1],[0,1], 'k--', label='landom classifier line(AUC:0.5)')
+plt.plot([fallout],[recall],'ro', ms=6) # fpr, tpr 출력
+plt.xlabel('fpr')
+plt.ylabel('tpr')
+plt.title('ROC Curve')
+plt.legend()
+plt.show()
+
+print("입력값 예측하기------------------------------------------------")
+# ['Daily Time Spent on Site', 'Age', 'Area Income','Daily Internet Usage']
+dtime = float(input("현재 페이지에 보낸 시간을 입력하세요: "))
+age = int(input("나이를 입력하세요: "))
+income = float(input("소득수준를 입력하세요: "))
+daily = float(input("평균 인터넷 사용 시간를 입력하세요: "))
+
+if not isinstance(dtime, float) or dtime < 0 :
+    print("페이지에 보낸 시간이 0보다 작거나 실수가 아닙니다.양의 실수 값을 입력해 주세요")
+elif  not isinstance(age, int) or age < 0:
+    print("나이가 0보다 작거나 정수가 아닙니다.양의 정수 값을 입력해 주세요")
+elif not isinstance(income, float) or income < 0 :
+    print("소득수준이 0보다 작거나 실수가 아닙니다.양의 실수 값을 입력해 주세요")
+elif not isinstance(daily, float) or daily < 0 :
+    print("평균 인터넷 사용 시간이 0보다 작거나 실수가 아닙니다.양의 실수 값을 입력해 주세요")
+else:
+    newdf = pd.DataFrame({'Daily Time Spent on Site':[dtime], 
+                            'Age':[age],
+                            'Area Income':[income],
+                            'Daily Internet Usage':[daily]})
+    sc.fit(newdf)
+    new_data = sc.transform(newdf)
+    
+    new_pred = model.predict(new_data)
+    if np.around(new_pred) == 1 :
+        print('입력값 예측결과 :', new_pred)
+        print("광고를 클릭 합니다.")
+    else:
+        print('입력값 예측결과 :', new_pred)
+        print("광고를 클릭 안합니다.")
