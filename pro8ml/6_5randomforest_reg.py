@@ -92,5 +92,17 @@ param_dist = {
 }
 
 search = RandomizedSearchCV(
-    
+    RandomForestRegressor(random_state=42),
+    param_distributions=param_dist,
+    n_iter=20,      # 20개의 random parameter 조합함.
+    scoring='r2',
+    cv=3,
+    random_state=42,
+    verbose=1       # 진행상황을 출력함(DL에서 사용함)
 )
+# 탐색 학습
+search.fit(x_train, y_train)
+print("search.best_params_ :", search.best_params_)
+best = search.best_estimator_
+print('best_score_ :', search.best_score_)
+print('final R² :', r2_score(y_test, best.predict(x_test)))
