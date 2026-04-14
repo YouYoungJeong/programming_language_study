@@ -168,44 +168,44 @@ print(advdf.iloc[[35, 178, 25, 175, 131]])
 -> 대부분 tv광고비는 매우 높으나 sales가 낮음 - 모델이 예측하기 어려운 포인트들이다.
 '''
 # 시각화
-# fig = sm.graphics.influence_plot(lm, alpha=0.05, criterion='cooks')
-# plt.show()
+fig = sm.graphics.influence_plot(lm, alpha=0.05, criterion='cooks')
+plt.show()
 
 # 시각화 2-1 - stem
-# cooks_d = lm.get_influence().cooks_distance[0]
-# plt.figure(figsize=(10, 4))
-## 각 관측치의 Cook's Distance를 세로선 형태로 표시
-# plt.stem(cooks_d, basefmt=" ")
-# plt.axhline(4 / len(cooks_d), linestyle='--')
-# plt.xlabel('관측치 인덱스')
-# plt.ylabel("Cook's Distance")
-# plt.title("Cook's Distance")
-# plt.show()
+cooks_d = lm.get_influence().cooks_distance[0]
+plt.figure(figsize=(10, 4))
+# 각 관측치의 Cook's Distance를 세로선 형태로 표시
+plt.stem(cooks_d, basefmt=" ")
+plt.axhline(4 / len(cooks_d), linestyle='--')
+plt.xlabel('관측치 인덱스')
+plt.ylabel("Cook's Distance")
+plt.title("Cook's Distance")
+plt.show()
 
 # 시각화 2-2
-# cooks_d = lm.get_influence().cooks_distance[0]
-# threshold = 4 / len(cooks_d)
-# plt.figure(figsize=(10, 4))
-# plt.stem(cooks_d, basefmt=" ")
-# plt.axhline(threshold, linestyle='--')
-# # 기준값을 넘는 인덱스만 표시
-# for i, v in enumerate(cooks_d):
-#     if v > threshold:
-#         plt.text(i, v, str(i), ha='center', va='bottom', fontsize=9)
-# plt.xlabel('관측치 인덱스')
-# plt.ylabel("Cook's Distance")
-# plt.title("Cook's Distance")
-# plt.show()
+cooks_d = lm.get_influence().cooks_distance[0]
+threshold = 4 / len(cooks_d)
+plt.figure(figsize=(10, 4))
+plt.stem(cooks_d, basefmt=" ")
+plt.axhline(threshold, linestyle='--')
+# 기준값을 넘는 인덱스만 표시
+for i, v in enumerate(cooks_d):
+    if v > threshold:
+        plt.text(i, v, str(i), ha='center', va='bottom', fontsize=9)
+plt.xlabel('관측치 인덱스')
+plt.ylabel("Cook's Distance")
+plt.title("Cook's Distance")
+plt.show()
 
 # 시각화3 - bar
-# cooks_d = lm.get_influence().cooks_distance[0]
-# plt.figure(figsize=(10, 4))
-# plt.bar(range(len(cooks_d)), cooks_d)
-# plt.axhline(4 / len(cooks_d), linestyle='--')
-# plt.xlabel('관측치 인덱스')
-# plt.ylabel("Cook's Distance")
-# plt.title("Cook's Distance")
-# plt.show()
+cooks_d = lm.get_influence().cooks_distance[0]
+plt.figure(figsize=(10, 4))
+plt.bar(range(len(cooks_d)), cooks_d)
+plt.axhline(4 / len(cooks_d), linestyle='--')
+plt.xlabel('관측치 인덱스')
+plt.ylabel("Cook's Distance")
+plt.title("Cook's Distance")
+plt.show()
 
 # 시각화 3-2
 cooks_d = lm.get_influence().cooks_distance[0]
