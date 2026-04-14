@@ -86,11 +86,11 @@ print()
 import joblib  # pickle보다 빠르고 대용량을 지원
 
 # 저장 - 이거 까지가 분석가가한다. 이후부터는 모델만 뿌려
-joblib.dump(model, 'treemodel.pkl') # 확장자명은 sav, model... 이 3개가 일반적으로 많이 사용
+joblib.dump(model, 'randomforestmodel.pkl') # 확장자명은 sav, model... 이 3개가 일반적으로 많이 사용
 del model
 
 # 읽기
-read_model = joblib.load('treemodel.pkl')
+read_model = joblib.load('randomforestmodel.pkl')
 
 # 새로운 값으로 예측하기
 # 주의! 만약 표준화된 자료로 모델을 생성했다면 new_data도 표준화 해야한다.
