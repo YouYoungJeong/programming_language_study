@@ -29,6 +29,7 @@ print(mtcar.am.unique()) # [1(수동) 0(자동)]
 # 모델 작성 방법 1 : logit()
 #================================================================================================
 import statsmodels.formula.api as smf
+# from statsmodels.formula.api import logit
 import numpy as np
 
 formula = 'am ~ hp+mpg' # am 범주형 ~ hp+mpg 연속형
