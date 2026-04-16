@@ -1,5 +1,5 @@
 '''ex49
-KNN(최근접 이웃_K-Nearest Neighbors)
+K-NN(최근접 이웃_K-Nearest Neighbors)
     iris dataset 사용
 '''
 import pandas as pd
