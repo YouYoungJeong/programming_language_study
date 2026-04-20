@@ -1,5 +1,5 @@
 '''
-군집분석(Clustering Analysis) - Clustering 기법중 계층적 클러스터
+군집분석(Clustering Analysis) - Clustering 기법중 계층적 클러스터(HCA)
     학생 10명의 시험점수 사용
 '''
 import pandas as pd
