@@ -140,3 +140,31 @@ print('func_ev_loss :', func_ev_loss)
 print('설명력 :',r2_score(y_test, func_model.predict(x_test)))
 # 설명력 : 0.8083456754684448
 print()
+
+#==============================================================
+# TensorBoard 사용하기
+# pip install tensorboard (기능이 좋아서 pytorch에서도 가져다 쓰고 있음.)
+#==============================================================
+from tensorflow.keras.callbacks import TensorBoard
+import datetime
+import os
+
+# TensorBoard 로그 저장 경로
+log_dir = os.path.join('logs','fit', datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
+
+# callback 운영하기
+tb = TensorBoard(
+    log_dir=log_dir, # 로그 저장 위치
+    histogram_freq = 1,
+    write_graph = True,
+    write_images =False  
+)
+
+func_model.fit(x_train, y_train, epochs=100, batch_size=32, verbose=2,
+                    validation_split = 0.2,
+                    callbacks=[tb]
+)
+
+# TensorBoard 실행후 결과 확인하기는 브라우저로 확인
+# (Window기준) 터미널 프롬프트 > tensorboard --logdir logs/fit
+# web 서비스가 진행됨. 여기서 확인
