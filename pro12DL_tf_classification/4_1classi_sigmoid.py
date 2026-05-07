@@ -15,6 +15,7 @@ from tensorflow.keras.optimizers import Adam
 import tensorflow as tf
 import numpy as np
 
+
 np.random.seed(42)
 tf.keras.utils.set_random_seed(42)
 

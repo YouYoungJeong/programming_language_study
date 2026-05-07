@@ -51,6 +51,11 @@ x_train, x_test, y_train, y_test = train_test_split(
     x, y, test_size=0.3, stratify=y, random_state=0
 )
 
+# Scailing
+scaler = StandardScaler()
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
+
 # model 생성 1 - Sequential
 print('='*30,' 방법1) Sequential API','='*30)
 model1 = Sequential([
@@ -60,8 +65,16 @@ model1 = Sequential([
     Dense(units=1, activation='sigmoid')
 ])
 
-# 조기종로
-early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+# model compile - 학습 방법 설정
+# 학습 전에 loss, optimizer, metric을 정해서 모델이 공부할 방법을 알려주는 단계
+model1.compile(
+    loss='binary_crossentropy', 
+    optimizer=Adam(learning_rate=0.001), 
+    metrics=['accuracy']
+)
+
+# 조기종료
+early_stop = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 
 # 모델 저장
 MODEL_DIR = '../classif_quiz/'
@@ -73,13 +86,6 @@ modelpath = MODEL_DIR + '/seq_model.keras'
 chkpoint = ModelCheckpoint(filepath=modelpath, monitor='val_loss', 
                         mode='auto', save_best_only=True)
 
-# model compile
-model1.compile(
-    loss='binary_crossentropy', 
-    optimizer=Adam(learning_rate=0.001), 
-    metrics=['accuracy']
-)
-
 # model fit
 seq_history = model1.fit(x_train, y_train, epochs=1000,
                     validation_split=0.2, 
@@ -87,6 +93,7 @@ seq_history = model1.fit(x_train, y_train, epochs=1000,
                     callbacks = [early_stop, chkpoint],
                     verbose=0)
 
+# 평가
 seq_eval = model1.evaluate(x_test, y_test, verbose=0)
 print(seq_eval) 
 print(f'평가 결과 : 손실(loss)={seq_eval[0]:.4f},정확도={seq_eval[1]:.4f}')
