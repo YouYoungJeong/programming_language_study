@@ -211,3 +211,5 @@ $RECYCLE.BIN/
 *.joblib
 *.mp4
 *.mp4
+.env
+pro16_rag/.env_lang
